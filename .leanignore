@@ -1,6 +1,7 @@
 .git
 .leancloud
 #api
+apiMin
 #dist
 dist_electron
 docs
@@ -17,7 +18,7 @@ src
 .leanignore
 #app.js
 babel.config.js
-gulpfile.js
+#gulpfile.js
 LICENSE
 nodemon.json
 #package-lock.json
