@@ -26,3 +26,6 @@ README.md
 #server-cluster.js
 #server.js
 vue.config.js
+
+# 忽略source map文件
+*.map 
