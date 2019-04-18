@@ -5,6 +5,7 @@ var uglify = require('gulp-uglify');
 var minify = require('gulp-minify');
 var gulpIgnore = require('gulp-ignore');
 var stripDebug = require('gulp-strip-debug');
+var replace = require('gulp-replace');
 
 gulp.task('default', function () {
     // 将你的默认的任务代码放在这
@@ -31,6 +32,7 @@ gulp.task('minapi', function (done) {
 
     var orig = '-debug.js';
     gulp.src('api/**/*.js')
+        .pipe(replace(/require\('..\/tools\/identifier.js'\)([\s\S]*)[\}\)]/i, ''))
         .pipe(stripDebug())
         .pipe(minify({
             ext: {

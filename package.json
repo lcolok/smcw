@@ -32,6 +32,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-ignore": "^2.0.2",
     "gulp-minify": "^3.1.0",
+    "gulp-replace": "^1.0.0",
     "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "leancloud-storage": "^3.13.0",

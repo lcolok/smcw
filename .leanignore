@@ -9,7 +9,7 @@ node_modules
 public
 #routes
 src
-#tools
+tools
 .env
 .gitattributes
 .gitconfig
@@ -22,7 +22,7 @@ babel.config.js
 LICENSE
 nodemon.json
 # 不提供package-lock也能让leancloud部署成功
-package-lock.json
+#package-lock.json
 #package.json
 README.md
 #server-cluster.js
