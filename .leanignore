@@ -21,7 +21,8 @@ babel.config.js
 #gulpfile.js
 LICENSE
 nodemon.json
-#package-lock.json
+# 不提供package-lock也能让leancloud部署成功
+package-lock.json
 #package.json
 README.md
 #server-cluster.js
