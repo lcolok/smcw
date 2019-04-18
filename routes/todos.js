@@ -6,7 +6,9 @@ var Todo = AV.Object.extend('Todo');
 
 // 查询 Todo 列表
 router.get('/', function(req, res, next) {
-  var query = new AV.Query(Todo);
+res.redirect('https://www.baidu.com')
+
+/*   var query = new AV.Query(Todo);
   query.descending('createdAt');
   query.find().then(function(results) {
     res.render('./views/todos', {
@@ -24,7 +26,7 @@ router.get('/', function(req, res, next) {
     } else {
       next(err);
     }
-  }).catch(next);
+  }).catch(next); */
 });
 
 // 新增 Todo 项目

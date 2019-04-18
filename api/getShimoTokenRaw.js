@@ -1,7 +1,9 @@
 var AV = require('leanengine');
 var requestJS = require('request');
 
-AV.Cloud.define('getShimoTokenRaw', async function (request) {
+var filename = __filename.split("/").pop().split(".js").shift();
+
+AV.Cloud.define(filename, async function (request) {
     return await getShimoTokenRaw();
 });
 

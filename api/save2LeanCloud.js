@@ -1,6 +1,8 @@
 var AV = require('leanengine');
 
-AV.Cloud.define('save2LeanCloud', (request) => { return save2LeanCloud(request) })
+var filename = __filename.split("/").pop().split(".js").shift();
+
+AV.Cloud.define(filename, (request) => { return save2LeanCloud(request) })
 
 function save2LeanCloud(request) {
     var dic = request.params;

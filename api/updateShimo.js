@@ -1,8 +1,8 @@
 var AV = require('leanengine');
 
-AV.Cloud.define('updateShimo', (request) => { return updateShimo(request) })
+var filename = __filename.split("/").pop().split(".js").shift();
 
-
+AV.Cloud.define(filename, (request) => { return updateShimo(request) })
 
 var axios = require('axios');
 const Qs = require("qs");
