@@ -40,7 +40,7 @@ gulp.task('minapi', function (done) {
         // .pipe(concat('bundle.min.js'))
         // .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest(destPath));
-    console.log('minapi任务已完成');
+    // console.log('minapi任务已完成');
     done();
 });
 
@@ -48,7 +48,7 @@ gulp.task('minapi', function (done) {
 
 gulp.task('prepublish',
     gulp.series(
-        done => { console.log('> gulp prepublish'); done() },//gulp 4x版本一定要"async completion" 详情请参考:http://t.cn/EXBpo2u
+        // done => { console.log('> gulp prepublish'); done() },//gulp 4x版本一定要"async completion" 详情请参考:http://t.cn/EXBpo2u
         'minapi',
     )
 );
