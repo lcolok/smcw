@@ -1,9 +1,11 @@
 var AV = require('leanengine');
 var requestJS = require('request');
 
+/*CRISPR-GULP-action:del*/
 var filename = __filename.split("/").pop().split(".js").shift();
+/*CRISPR-GULP-action:del*/
 
-AV.Cloud.define(filename, async function (request) {
+AV.Cloud.define(/*CRISPR-GULP-action:filename*/filename/*CRISPR-GULP-action:filename*/, async function (request) {
     return await getQiniuJSON(request);
 });
 
@@ -31,7 +33,7 @@ async function getQiniuJSON(request) {
     })
 }
 
-/*CRISPR-GULP-BEGIN-action:del*/
+/*CRISPR-GULP-action:del*/
 
 require('../tools/identifier.js').run({
     rules: '!vscode||local',
@@ -44,6 +46,6 @@ require('../tools/identifier.js').run({
         })
         // console.log(feedback);
     }
-}) 
+})
 
-/*CRISPR-GULP-END*/
+/*CRISPR-GULP-action:del*/

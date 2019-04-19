@@ -6,6 +6,7 @@ var minify = require('gulp-minify');
 var gulpIgnore = require('gulp-ignore');
 var stripDebug = require('gulp-strip-debug');
 var replace = require('gulp-replace');
+var gulpif = require('gulp-if');
 
 gulp.task('default', function () {
     // 将你的默认的任务代码放在这
@@ -32,7 +33,7 @@ gulp.task('minapi', function (done) {
 
     var orig = '-debug.js';
     gulp.src('api/**/*.js')
-        .pipe(replace(/(\/\*[\S]*CRISPR-GULP-BEGIN[\S]*\*\/)([\s\S]*)(\/\*[\S]*CRISPR-GULP-END[\S]*\*\/)/igm, function (match, p1, p2, p3, offset, string) {
+        .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, function (match, p1, p2, p3, offset, string) {
             // Replace foobaz with barbaz and log a ton of information
             // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter
             // console.log('Found ' + match + ' with param ' + p1 + ' at ' + offset + ' inside of ' + string);
@@ -45,17 +46,21 @@ gulp.task('minapi', function (done) {
 
             console.log(name);
 
-
-            var result;
+            /* result = actions[name]; */
+            var result = match;//默认是不替换,匹配部分换成结果,就是不替换
             switch (name) {
                 case 'DEL':
                     result = '';
                     break;
+                case 'FILENAME':
+                    result = `"${this.file.relative.split('.').shift()}"`
+                    break;
                 default:
+
                     break;
             }
 
-            console.log(result);
+            // console.log(result);
 
             return result;
         }))
