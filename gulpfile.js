@@ -7,6 +7,7 @@ var gulpIgnore = require('gulp-ignore');
 var stripDebug = require('gulp-strip-debug');
 var replace = require('gulp-replace');
 var gulpif = require('gulp-if');
+const changed = require('gulp-changed');
 
 gulp.task('default', function () {
     // 将你的默认的任务代码放在这
@@ -25,14 +26,10 @@ gulp.task('docs', function (callback) {
 
 gulp.task('minapi', function (done) {
     var destPath = 'apiMin';
-    try {
-        del([
-            destPath
-        ]);
-    } catch (e) { console.log(e); }
 
     var orig = '-debug.js';
     gulp.src('api/**/*.js')
+        .pipe(changed(destPath))
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, function (match, p1, p2, p3, offset, string) {
             // Replace foobaz with barbaz and log a ton of information
             // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter

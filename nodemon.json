@@ -6,6 +6,6 @@
     ".git"
   ],
   "events": {
-    "start": "gulp prepublish"
+    "restart": "gulp prepublish"
   }
 }
