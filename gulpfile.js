@@ -32,7 +32,7 @@ gulp.task('minapi', function (done) {
 
     var orig = '-debug.js';
     gulp.src('api/**/*.js')
-        .pipe(replace(/require\('..\/tools\/identifier.js'\)([\s\S]*)[\}\)]/i, ''))
+        .pipe(replace(/(\/\*CRISPR-GULP-BEGIN\*\/)([\s\S]*)(\/\*CRISPR-GULP-END\*\/)/igm, ''))
         .pipe(stripDebug())
         .pipe(minify({
             ext: {

@@ -370,6 +370,7 @@ async function updateShimo(request) {
 
 }
 
+/*CRISPR-GULP-BEGIN*/
 
 require('../tools/identifier.js').run({
     rules: '!vscode||local',
@@ -377,3 +378,5 @@ require('../tools/identifier.js').run({
         updateShimo();
     }
 }) 
+
+/*CRISPR-GULP-END*/
