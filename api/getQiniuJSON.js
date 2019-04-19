@@ -1,11 +1,7 @@
 var AV = require('leanengine');
 var requestJS = require('request');
 
-/*CRISPR-GULP-action:del*/
-var filename = __filename.split("/").pop().split(".js").shift();
-/*CRISPR-GULP-action:del*/
-
-AV.Cloud.define(/*CRISPR-GULP-action:filename*/filename/*CRISPR-GULP-action:filename*/, async function (request) {
+AV.Cloud.define(/*CRISPR-GULP-action:filename*/__filename.split("/").pop().split(".js").shift()/*CRISPR-GULP-action:filename*/, async function (request) {
     return await getQiniuJSON(request);
 });
 
