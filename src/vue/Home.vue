@@ -16,7 +16,8 @@
     </v-toolbar>
 
     <v-content>
-      <HelloWorld />
+      <!-- <HelloWorld /> -->
+      <v-btn @click="$router.push({path:'/u'}) "><v-icon>mdi-cloud-upload</v-icon>上传专页</v-btn>
     </v-content>
   </v-app>
 </template>

@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@mdi/font": "^3.6.95",
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-plugin-eslint": "^3.6.0",
     "@vue/cli-plugin-pwa": "^3.6.0",
@@ -64,6 +65,7 @@
     "electron": "^4.1.4",
     "eslint": "^5.15.3",
     "eslint-plugin-vue": "^5.0.0",
+    "material-design-icons-iconfont": "^4.0.5",
     "nodemon": "^1.18.11",
     "raw-loader": "^2.0.0",
     "stylus": "^0.54.5",
