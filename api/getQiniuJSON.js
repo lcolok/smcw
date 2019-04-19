@@ -31,7 +31,7 @@ async function getQiniuJSON(request) {
     })
 }
 
-/*CRISPR-GULP-BEGIN*/
+/*CRISPR-GULP-BEGIN-action:del*/
 
 require('../tools/identifier.js').run({
     rules: '!vscode||local',

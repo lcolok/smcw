@@ -32,7 +32,33 @@ gulp.task('minapi', function (done) {
 
     var orig = '-debug.js';
     gulp.src('api/**/*.js')
-        .pipe(replace(/(\/\*CRISPR-GULP-BEGIN\*\/)([\s\S]*)(\/\*CRISPR-GULP-END\*\/)/igm, ''))
+        .pipe(replace(/(\/\*[\S]*CRISPR-GULP-BEGIN[\S]*\*\/)([\s\S]*)(\/\*[\S]*CRISPR-GULP-END[\S]*\*\/)/igm, function (match, p1, p2, p3, offset, string) {
+            // Replace foobaz with barbaz and log a ton of information
+            // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter
+            // console.log('Found ' + match + ' with param ' + p1 + ' at ' + offset + ' inside of ' + string);
+
+            var name = p1.match(/action:[^-*]*/im)[0]
+                .match(/:[\S]*/im)[0]
+                .split(':')
+                .pop()
+                .toUpperCase();
+
+            console.log(name);
+
+
+            var result;
+            switch (name) {
+                case 'DEL':
+                    result = '';
+                    break;
+                default:
+                    break;
+            }
+
+            console.log(result);
+
+            return result;
+        }))
         .pipe(stripDebug())
         .pipe(minify({
             ext: {
