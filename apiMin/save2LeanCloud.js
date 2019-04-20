@@ -1,1 +1,0 @@
-function save2LeanCloud(e){var n=e.params,a=new(AV.Object.extend(n.chosenClass));for(var o in n)a.set(o,n[o]);a.save().then(function(){},function(e){})}var AV=require("leanengine");AV.Cloud.define("save2LeanCloud",async function(e){return await save2LeanCloud(e)});

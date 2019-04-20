@@ -70,7 +70,7 @@ gulp.task('minapi', function (done) {
             },
         }))
         .pipe(gulpIgnore.exclude('*' + orig))//可以用于过滤文件
-        // .pipe(concat('bundle.min.js'))
+        .pipe(concat('bundle.min.js'))
         // .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest(destPath));
     // console.log('minapi任务已完成');
@@ -79,6 +79,12 @@ gulp.task('minapi', function (done) {
 
 gulp.task('LeanCloudAPI', function (done) {
     var destPath = 'apiMin';
+
+    try {
+        del([
+            destPath
+        ]);
+    } catch (e) { console.log(e); }
 
     var orig = '-debug.js';
     gulp.src('api/**/*.js')
@@ -113,14 +119,19 @@ gulp.task('LeanCloudAPI', function (done) {
 
             return result;
         }))
-        .pipe(gap.appendText(`var AV = require('leanengine');
+        .pipe(gap.appendText(`
         AV.Cloud.define("thisFunc", async function (request) {
             return await thisFunc(request);
-        });`))
-        .pipe(replace(/thisFunc/igm,function(){
+        });
+        `))
+        .pipe(replace(/thisFunc/igm, function () {
             return this.file.relative.split('.').shift();
         }))
         .pipe(stripDebug())
+        .pipe(concat('bundle.min.js'))
+        .pipe(gap.prependText(`
+        var AV = require('leanengine');
+        `))
         .pipe(minify({
             ext: {
                 src: orig,//源文件的后缀
@@ -128,7 +139,7 @@ gulp.task('LeanCloudAPI', function (done) {
             },
         }))
         .pipe(gulpIgnore.exclude('*' + orig))//可以用于过滤文件
-        // .pipe(concat('bundle.min.js'))
+
         // .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest(destPath));
     // console.log('minapi任务已完成');

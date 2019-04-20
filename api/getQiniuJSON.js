@@ -30,7 +30,7 @@ require('../tools/identifier.js').run({
     rules: '!vscode||local',
     func: async () => {
 
-        var feedback = await getQiniuJSON({
+        var feedback = await thisFunc({
             params: {
                 fileNameArr: ['test.mp4']
             }

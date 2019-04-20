@@ -371,7 +371,7 @@ async function thisFunc(request) {
 require('../tools/identifier.js').run({
     rules: '!vscode||local',
     func: () => {
-        updateShimo();
+        thisFunc();
     }
 }) 
 

@@ -1,1 +1,0 @@
-var requestJS=require("request");function getShimoTokenRaw(e){return new Promise((e,o)=>{requestJS.post("https://shimo.im/api/upload/token",{json:!0,headers:{Cookie:process.env.shimoCookie}},(n,i,r)=>{if(n)o(!1);else{var t=r.data.accessToken.toString();e(t)}})})}var AV=require("leanengine");AV.Cloud.define("getShimoTokenRaw",async function(e){return await getShimoTokenRaw(e)});
