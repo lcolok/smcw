@@ -1,1 +1,1 @@
-var AV=require("leanengine"),filename=__filename.split("/").pop().split(".js").shift();function save2LeanCloud(e){var n=e.params,a=new(AV.Object.extend(n.chosenClass));for(var i in n)a.set(i,n[i]);a.save().then(function(){},function(e){})}AV.Cloud.define(filename,e=>save2LeanCloud(e));
+function save2LeanCloud(e){var n=e.params,a=new(AV.Object.extend(n.chosenClass));for(var o in n)a.set(o,n[o]);a.save().then(function(){},function(e){})}var AV=require("leanengine");AV.Cloud.define("save2LeanCloud",async function(e){return await save2LeanCloud(e)});

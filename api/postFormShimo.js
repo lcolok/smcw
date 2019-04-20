@@ -1,11 +1,6 @@
-var AV = require('leanengine');
 var http = require('request');
 
-var filename = __filename.split("/").pop().split(".js").shift();
-
-AV.Cloud.define(filename, (request) => { return postFormShimo(request) })
-
-async function postFormShimo(request) {
+async function thisFunc(request) {
 
     var token = await AV.Cloud.run('getShimoTokenRaw');
     var data = request.params.data;

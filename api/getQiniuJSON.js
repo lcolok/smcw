@@ -1,12 +1,7 @@
-var AV = require('leanengine');
+
 var requestJS = require('request');
 
-AV.Cloud.define(/*CRISPR-GULP-action:filename*/__filename.split("/").pop().split(".js").shift()/*CRISPR-GULP-action:filename*/, async function (request) {
-    return await getQiniuJSON(request);
-});
-
-
-async function getQiniuJSON(request) {
+async function thisFunc(request) {
 
     var fileNameArr = request.params.fileNameArr;
     var shimoToken = await AV.Cloud.run('getShimoTokenRaw');

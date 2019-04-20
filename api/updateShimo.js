@@ -1,8 +1,4 @@
-var AV = require('leanengine');
 
-var filename = __filename.split("/").pop().split(".js").shift();
-
-AV.Cloud.define(filename, (request) => { return updateShimo(request) })
 
 var axios = require('axios');
 const Qs = require("qs");
@@ -334,7 +330,7 @@ async function save2DataBase(params) {
     return output
 }
 
-async function updateShimo(request) {
+async function thisFunc(request) {
 
     var feedback;
 

@@ -1,10 +1,4 @@
-var AV = require('leanengine');
-
-var filename = __filename.split("/").pop().split(".js").shift();
-
-AV.Cloud.define(filename, (request) => { return save2LeanCloud(request) })
-
-function save2LeanCloud(request) {
+function thisFunc(request) {
     var dic = request.params;
     var extendedClass = AV.Object.extend(dic.chosenClass);
     var file = new extendedClass();

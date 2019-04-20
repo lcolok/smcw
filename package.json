@@ -29,6 +29,7 @@
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-preview": "^4.0.8",
     "gulp": "^4.0.0",
+    "gulp-append-prepend": "^1.0.8",
     "gulp-changed": "^3.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
