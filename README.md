@@ -1,4 +1,4 @@
-# electron_vue_leancloud_template
+# Shared Management Center
 
 ## Project setup
 ```
