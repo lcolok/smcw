@@ -3,7 +3,8 @@
     "views/*",
     "public/*",
     "apiMin/*",
-    ".git"
+    ".git",
+    "serverless"
   ],
   "events": {
     "restart": "gulp prepublish"

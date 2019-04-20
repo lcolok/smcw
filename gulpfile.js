@@ -78,7 +78,7 @@ gulp.task('minapi', function (done) {
 });
 
 gulp.task('LeanCloudAPI', function (done) {
-    var destPath = 'apiMin';
+    var destPath = 'serverless';
 
     try {
         del([
