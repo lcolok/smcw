@@ -112,10 +112,10 @@ gulp.task('LeanCloudAPI', function (done) {
         // }))
         // .pipe(gulpIgnore.exclude('*' + orig))//可以用于过滤文件
 
-        // .pipe(uglify({
-        // toplevel: true,
-        // }))
-        // .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
+        .pipe(uglify({
+        toplevel: true,
+        }))
+        .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(gulp.dest(destPath));
     // console.log('minapi任务已完成');
     done();
@@ -142,10 +142,10 @@ gulp.task('LeanCloudAPI', function (done) {
         switch (name) {
             case 'D':
             case 'DEL':
-          
                 result = '';
                 break;
-            case 'FILENAME', 'F':
+            case 'F':
+            case 'FILENAME':
                 result = `"${this.file.relative.split('.').shift()}"`
                 break;
             default:
