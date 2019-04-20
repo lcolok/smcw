@@ -92,7 +92,7 @@ gulp.task('LeanCloudAPI', function (done) {
     gulp.src('api/**/*.js')
         // .pipe(gulpIgnore.exclude('public/**/*'))//用于过滤public文件
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
-
+        .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(gap.appendText(`
         AV.Cloud.define("thisFunc", async function (request) {
             return await thisFunc(request);
@@ -129,7 +129,7 @@ gulp.task('LeanCloudAPI', function (done) {
         // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter
         // console.log('Found ' + match + ' with param ' + p1 + ' at ' + offset + ' inside of ' + string);
 
-        var name = p1.match(/(action)?:[a-z]+/img)[0]
+        var name = p1.match(/(action)?:[a-z]+/im)[0]
             .match(/:[\S]*/im)[0]
             .split(':')
             .pop()
@@ -140,8 +140,9 @@ gulp.task('LeanCloudAPI', function (done) {
         /* result = actions[name]; */
         var result = match;//默认是不替换,匹配部分换成结果,就是不替换
         switch (name) {
-            case 'DEL':
             case 'D':
+            case 'DEL':
+          
                 result = '';
                 break;
             case 'FILENAME', 'F':
