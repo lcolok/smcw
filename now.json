@@ -1,0 +1,10 @@
+{
+    "name": "smc_vue",
+    "version": 2,
+    "builds": [
+        {
+            "src": "**/*.js",
+            "use": "@now/node"
+        }
+    ]
+}
