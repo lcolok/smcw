@@ -12,8 +12,9 @@ const gap = require('gulp-append-prepend');
 var gutil = require('gulp-util');
 
 
-gulp.task('default', function () {
+gulp.task('default', done=>{
     // 将你的默认的任务代码放在这
+    done();
 });
 
 

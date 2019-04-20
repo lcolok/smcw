@@ -10,7 +10,7 @@
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "start": "node server.js",
-    "prepublish": "gulp prepublish"
+    "prepublish": "gulp"
   },
   "main": "server.js",
   "dependencies": {
