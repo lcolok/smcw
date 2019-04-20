@@ -24,7 +24,7 @@ async function thisFunc(request) {
     })
 }
 
-/*CRISPR-GULP-action:del*/
+/*CG:D*/
 
 require('../tools/identifier.js').run({
     rules: '!vscode||local',
@@ -39,4 +39,4 @@ require('../tools/identifier.js').run({
     }
 })
 
-/*CRISPR-GULP-action:del*/
+/*CG:D*/

@@ -92,7 +92,7 @@ gulp.task('LeanCloudAPI', function (done) {
     gulp.src('api/**/*.js')
         // .pipe(gulpIgnore.exclude('public/**/*'))//用于过滤public文件
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
-        .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
+
         .pipe(gap.appendText(`
         AV.Cloud.define("thisFunc", async function (request) {
             return await thisFunc(request);
@@ -113,7 +113,7 @@ gulp.task('LeanCloudAPI', function (done) {
         // .pipe(gulpIgnore.exclude('*' + orig))//可以用于过滤文件
 
         // .pipe(uglify({
-            // toplevel: true,
+        // toplevel: true,
         // }))
         // .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(gulp.dest(destPath));
@@ -124,7 +124,7 @@ gulp.task('LeanCloudAPI', function (done) {
     function CG() {
 
         var [match, p1, p2, p3, offset, string] = arguments[0];
-        
+
         // Replace foobaz with barbaz and log a ton of information
         // See http://mdn.io/string.replace#Specifying_a_function_as_a_parameter
         // console.log('Found ' + match + ' with param ' + p1 + ' at ' + offset + ' inside of ' + string);
@@ -140,10 +140,11 @@ gulp.task('LeanCloudAPI', function (done) {
         /* result = actions[name]; */
         var result = match;//默认是不替换,匹配部分换成结果,就是不替换
         switch (name) {
-            case 'DEL','D':
+            case 'DEL':
+            case 'D':
                 result = '';
                 break;
-            case 'FILENAME','F':
+            case 'FILENAME', 'F':
                 result = `"${this.file.relative.split('.').shift()}"`
                 break;
             default:
