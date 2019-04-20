@@ -3,7 +3,6 @@
 var axios = require('axios');
 const Qs = require("qs");
 var fs = require('fs');
-var request = require('request');
 // var FormData = require('form-data');
 
 

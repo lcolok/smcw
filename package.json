@@ -38,6 +38,8 @@
     "gulp-replace": "^1.0.0",
     "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-util": "^3.0.8",
     "leancloud-storage": "^3.13.0",
     "leanengine": "^3.3.3",
     "lodash": "^4.17.11",

@@ -1,4 +1,4 @@
-var http = require('request');
+
 
 async function thisFunc(request) {
 
@@ -6,7 +6,7 @@ async function thisFunc(request) {
     var data = request.params.data;
     var filename = request.params.filename;
     return new Promise((resolve, reject) => {
-        const r = http.post({
+        const r = requestJS.post({
             url: 'https://uploader.shimo.im/upload2',
             // header: headers,
         }, function optionalCallback(err, httpResponse, body) {//上传成功后的callback
