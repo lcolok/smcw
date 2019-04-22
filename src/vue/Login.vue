@@ -1,60 +1,29 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
-            <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <!--                 <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <v-btn :href="source" icon large target="_blank" v-on="on">
-                      <v-icon large>mdi-code-tags</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Source</span>
-                </v-tooltip>
-                <v-tooltip right>
-                  <template v-slot:activator="{ on }">
-                    <v-btn icon large href="https://codepen.io/johnjleider/pen/wyYVVj" target="_blank" v-on="on">
-                      <v-icon large>mdi-codepen</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Codepen</span>
-                </v-tooltip>-->
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    v-model="username"
-                    prepend-icon="mdi-account"
-                    name="login"
-                    label="Login"
-                    type="text"
-                    @keydown.enter="login"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="password"
-                    prepend-icon="mdi-lock"
-                    name="password"
-                    label="Password"
-                    type="password"
-                    @keydown.enter="login"
-                  ></v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" @click="login">Login</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
-  </v-app>
+  <a-layout style=" height: 100%;">
+    <a-row type="flex" justify="center" align="middle">
+      <a-card
+        hoverable
+        :style="{ margin: '24px 16px',padding: 0,  background: '#fff', width: '300px'}"
+      >
+        <img
+          alt="example"
+          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+          slot="cover"
+        >
+        <template class="ant-card-actions" slot="actions">
+          <a-icon type="setting"/>
+          <a-icon type="edit"/>
+          <a-icon type="ellipsis"/>
+        </template>
+        <a-card-meta title="Card title" description="This is the description">
+          <a-avatar
+            slot="avatar"
+            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          />
+        </a-card-meta>
+      </a-card>
+    </a-row>
+  </a-layout>
 </template>
 
 <script>
@@ -84,7 +53,7 @@ export default {
           console.log(app.user);
         })
         .catch(e => {
-         console.log(e);
+          console.log(e);
         });
     }
   }

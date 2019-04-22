@@ -1,4 +1,4 @@
-import './plugins/vuetify'
+import './plugins/antd'
 import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
