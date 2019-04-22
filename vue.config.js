@@ -1,5 +1,5 @@
 const CompressionPlugin = require("compression-webpack-plugin")
-const productionGzipExtensions = ['js', 'css']
+const productionGzipExtensions = ['js', 'html', 'css']
 
 
 
@@ -16,7 +16,7 @@ module.exports = {
         modifyVars: {
           'primary-color': '#1DA57A',
           'link-color': '#1DA57A',
-          'border-radius-base': '4px',
+          'border-radius-base': '6px',
 
         },
         javascriptEnabled: true
@@ -24,13 +24,12 @@ module.exports = {
     }
   },
 
-  configureWebpack: config => {
+/*   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       return {
         plugins: [
-
           new CompressionPlugin({
-            test: /\.js$|\.html$|.\css/, //匹配文件名
+            test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
             threshold: 10240,//对超过10k的数据压缩
             deleteOriginalAssets: false //不删除源文件
           })
@@ -38,7 +37,7 @@ module.exports = {
       }
     }
 
-  },
+  }, */
 
   pluginOptions: {
     i18n: {

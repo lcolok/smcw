@@ -38,7 +38,7 @@ const router = new Router({
       name: 'SignUp',
       component: SignUp,
       meta: {
-        title: '登录',
+        title: '注册',
       }
     },
     {
