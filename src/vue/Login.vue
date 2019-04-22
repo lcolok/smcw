@@ -23,6 +23,17 @@
         </a-card-meta>
       </a-card>
     </a-row>
+    <a-row type="flex" justify="center" align="middle">
+      <a-card
+        hoverable
+        :style="{ margin: '24px  16px',padding: 0,  background: '#fff', width: '300px'}"
+      >
+        <a-input placeholder="Username" size="large" v-model="userName" ref="userNameInput">
+          <a-icon slot="prefix" type="user"/>
+          <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty"/>
+        </a-input>
+      </a-card>
+    </a-row>
   </a-layout>
 </template>
 
@@ -30,13 +41,20 @@
 export default {
   data: () => ({
     drawer: null,
-    username: "",
+    userName: "",
     password: ""
   }),
   props: {
     source: String
   },
   methods: {
+    emitEmpty() {
+      this.$refs.userNameInput.focus();
+      this.userName = "";
+    },
+    onSearch(value) {
+      console.log(value);
+    },
     login() {
       var username = this.username;
       var password = this.password;
