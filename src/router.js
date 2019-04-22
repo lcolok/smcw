@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './vue/Home.vue'
 import NotFound from './vue/NotFound.vue'
-import lotties from './vue/tools/Lotties.vue'
+
 import Upload from './vue/Upload.vue'
 import Login from './vue/Login.vue'
 import SignUp from './vue/SignUp.vue'
@@ -69,14 +69,6 @@ const router = new Router({
         import('./vue/Mescroll.vue');
 
       }
-    },
-    {
-      path: '/lotties',
-      name: 'lotties',
-      meta: {
-        title: 'lotties'
-      },
-      component: lotties
     },
     {
       path: '/about',

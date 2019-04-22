@@ -1,3 +1,5 @@
+
+
 module.exports = {
   outputDir: undefined,
   publicPath: './',
@@ -28,5 +30,7 @@ module.exports = {
     }
   },
 
-  lintOnSave: undefined
+  lintOnSave: undefined,
+
+  
 }
