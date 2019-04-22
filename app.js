@@ -1,5 +1,6 @@
 'use strict';
 
+var compression = require('compression');
 var express = require('express');
 var timeout = require('connect-timeout');
 var path = require('path');
@@ -27,6 +28,8 @@ require('require-all')({
 
 
 var app = express();
+
+app.use(compression());
 
 // 设置模板引擎
 app.set('views', path.join(__dirname, 'dist'));
