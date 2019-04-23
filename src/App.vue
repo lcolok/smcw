@@ -1,7 +1,7 @@
 
 
 <template v-cloak>
-  <div id="app">
+  <div id="app" style=" height: 100%;">
     <!--     <transition enter-to-class="animated bounceInLeft" leave-to-class="animated bounceOutRight" mode="out-in">
       <router-view></router-view>
     </transition>-->

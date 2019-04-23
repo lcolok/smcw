@@ -15,7 +15,7 @@ import {
     //   Carousel,
     //   Cascader,
     //   Checkbox,
-    //   Col,
+      Col,
     //   DatePicker,
     //   Divider,
     //   Dropdown,
@@ -84,7 +84,7 @@ Vue.use(Card);
 // Vue.use(Carousel);
 // Vue.use(Cascader);
 // Vue.use(Checkbox);
-// Vue.use(Col);
+Vue.use(Col);
 // Vue.use(DatePicker);
 // Vue.use(Divider);
 // Vue.use(Drawer);
