@@ -3,7 +3,7 @@
     <a-row type="flex" justify="center" align="middle" style="height: 100%;">
       <div>
         <a-row>
-          <a-card :style="{ margin: '24px  16px',padding: 0,  background: '#fff', width: '300px'}">
+          <a-card :style="{ margin: '24px  16px',padding: 0,  background: '#fff', width: '320px'}">
             <p>
               <a-input placeholder="Username" size="large" v-model="userName" ref="userNameInput">
                 <a-icon slot="prefix" type="user"/>
