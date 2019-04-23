@@ -11,28 +11,36 @@
               </a-input>
             </p>
             <p>
-              <a-input
-                placeholder="Password"
-                size="large"
-                v-model="password"
-                ref="passwordInput"
-                :type="passwordType"
-              >
-                <a-icon slot="prefix" type="lock"/>
-                <a-icon
-                  v-if="password"
-                  slot="suffix"
-                  :type="passwordType=='text'?'eye-invisible':'eye'"
-                  @click="visibleToggle"
-                />
-              </a-input>
+              <transition name="passwordError-transition" enter-active-class="animated shake">
+                <a-input
+                  placeholder="Password"
+                  size="large"
+                  v-model="password"
+                  v-if="passwordError"
+                  ref="passwordInput"
+                  :type="passwordType"
+                >
+                  <a-icon slot="prefix" type="lock"/>
+                  <a-icon
+                    v-if="password"
+                    slot="suffix"
+                    :type="passwordType=='text'?'eye-invisible':'eye'"
+                    @click="visibleToggle"
+                  />
+                </a-input>
+              </transition>
             </p>
             <p style="text-align:right">
               <a>Forgot password?</a>
             </p>
-       
-              <a-button type="primary" block>Login</a-button>
-         
+            <transition name="passwordError-transition" enter-active-class="animated shake">
+              <a-button
+                v-if="loginBTN"
+                :type="loginSuccess?'primary':'danger'"
+                block
+                @click="login"
+              >{{loginSuccess?'Login':'Incorrect username or password'}}</a-button>
+            </transition>
           </a-card>
         </a-row>
 
@@ -47,6 +55,10 @@
 <script>
 export default {
   data: () => ({
+    show: true,
+    passwordError: true,
+    loginBTN: true,
+    loginSuccess: true,
     drawer: null,
     userName: "",
     password: "",
@@ -72,6 +84,17 @@ export default {
     login() {
       var username = this.username;
       var password = this.password;
+
+      if (!password) {
+        this.loginBTN = false;
+        this.loginSuccess = false;
+        setTimeout(() => {
+          this.loginBTN = true;
+        }, 0);
+        setTimeout(() => {
+          this.loginSuccess = true;
+        }, 2000);
+      }
 
       console.log([username, password]);
 
