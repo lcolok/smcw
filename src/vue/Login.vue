@@ -5,7 +5,13 @@
         <a-row>
           <a-card :style="{ margin: '24px  16px',padding: 0,  background: '#fff', width: '320px'}">
             <p>
-              <a-input placeholder="Username" size="large" v-model="userName" ref="userNameInput">
+              <a-input
+                placeholder="Username"
+                size="large"
+                v-model="userName"
+                ref="userNameInput"
+                v-focus-next-on-enter="'passwordInput'"
+              >
                 <a-icon slot="prefix" type="user"/>
                 <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty"/>
               </a-input>
@@ -19,6 +25,7 @@
                   v-if="passwordError"
                   ref="passwordInput"
                   :type="passwordType"
+                  v-focus-next-on-enter="'userNameInput'"
                 >
                   <a-icon slot="prefix" type="lock"/>
                   <a-icon
@@ -54,6 +61,21 @@
 
 <script>
 export default {
+  directives: {
+    focusNextOnEnter: {
+      bind: function(el, { value }, vnode) {
+        el.addEventListener("keyup", ev => {
+          if (ev.keyCode === 13) {
+            let nextInput = vnode.context.$refs[value];
+            if (nextInput && typeof nextInput.focus === "function") {
+              nextInput.focus();
+              nextInput.select();
+            }
+          }
+        });
+      }
+    }
+  },
   data: () => ({
     show: true,
     passwordError: true,

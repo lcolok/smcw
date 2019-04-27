@@ -1,4 +1,5 @@
 {
-  "message": "你好 i18n !!",
-  "Welcome to Vuetify":"欢迎来到Vetify"
+  "Forgot password?": "忘记密码？",
+  "Welcome to Vuetify": "欢迎来到Vetify",
+  "message": "你好 i18n !!"
 }

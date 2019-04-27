@@ -4,12 +4,21 @@
       <div>
         <a-row>
           <a-card :style="{ margin: '24px  16px',padding: 0,  background: '#fff', width: '320px'}">
-            <p>
-              <a-input placeholder="Username" size="large" v-model="userName" ref="userNameInput">
-                <a-icon slot="prefix" type="user"/>
-                <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty"/>
-              </a-input>
-            </p>
+            <a-row v-for="(item,index) in inputs" :key="index.toString()" :span="24">
+              <p>
+                <a-input
+                  placeholder="Username"
+                  size="large"
+                  v-model="item.val"
+                  ref="userNameInput"
+                  v-focus="focusIndex === index"
+                  @pressEnter="nextFocus(index)"
+                >
+                  <a-icon slot="prefix" type="user"/>
+                  <a-icon v-if="userName" slot="suffix" type="close-circle" @click="emitEmpty"/>
+                </a-input>
+              </p>
+            </a-row>
             <p>
               <transition name="passwordError-transition" enter-active-class="animated shake">
                 <a-input
@@ -54,20 +63,63 @@
 
 <script>
 export default {
-  data: () => ({
-    show: true,
-    passwordError: true,
-    loginBTN: true,
-    loginSuccess: true,
-    drawer: null,
-    userName: "",
-    password: "",
-    passwordType: "password"
-  }),
+  directives: {
+    focus: {
+      inserted: function(el, obj) {
+        //这是需要页面刚加载就能进行聚焦操作使用的钩子函数,可以省略的，视具体需求而定
+        //console.log(obj);
+        if (obj.value) {
+          //对值进行判断
+          // 聚焦元素
+          el.focus();
+        }
+      },
+      // 当指令所在组件的 VNode 及其子 VNode 全部更新后调用
+      componentUpdated: function(el, obj) {
+        //这是每当绑定的值发生改变时触发的钩子函数
+        //console.log(obj);  //可以打印看一下
+        if (obj.value) {
+          el.focus();
+        }
+      }
+    }
+  },
+  data() {
+    return {
+      focusIndex: 0, //用来存放下一个应该聚焦的index值
+      inputs: [
+        {
+          val: 1
+        },
+        {
+          val: 2
+        },
+        {
+          val: 3
+        },
+        {
+          val: 4
+        }
+      ],
+
+      show: true,
+      passwordError: true,
+      loginBTN: true,
+      loginSuccess: true,
+      drawer: null,
+      userName: "",
+      password: "",
+      passwordType: "password"
+    };
+  },
   props: {
     source: String
   },
   methods: {
+    nextFocus(index) {
+      console.log(index);
+      return (this.focusIndex = index + 1);
+    },
     visibleToggle() {
       this.passwordType == "text"
         ? (this.passwordType = "password")

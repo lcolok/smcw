@@ -2,9 +2,9 @@
 
 <template v-cloak>
   <div id="app" style=" height: 100%;">
-    <!--     <transition enter-to-class="animated bounceInLeft" leave-to-class="animated bounceOutRight" mode="out-in">
+<!--     <transition enter-to-class="animated bounceInLeft">
       <router-view></router-view>
-    </transition>-->
+    </transition> -->
     <transition>
       <router-view></router-view>
     </transition>
