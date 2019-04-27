@@ -31,7 +31,7 @@
               </transition>
             </p>
             <p style="text-align:right">
-              <a>Forgot password?</a>
+              <a>{{ $t("Forgot password?") }}</a>
             </p>
             <transition name="passwordError-transition" enter-active-class="animated shake">
               <a-button
@@ -45,7 +45,7 @@
         </a-row>
 
         <a-row type="flex" justify="center">
-          <a>Creat account</a>
+          <a @click="$router.push({path:'/signup'})">Creat account</a>
         </a-row>
       </div>
     </a-row>
