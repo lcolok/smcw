@@ -6,6 +6,7 @@ import NotFound from './vue/NotFound.vue'
 import Upload from './vue/Upload.vue'
 import Login from './vue/Login.vue'
 import SignUp from './vue/SignUp.vue'
+import Draggable from './vue/Draggable.vue'
 
 Vue.use(Router);
 
@@ -47,7 +48,7 @@ const router = new Router({
       component: Home,
       meta: {
         title: '首页入口',
-        requiresAuth: true,
+        // requiresAuth: true,
       }
     },
     {
@@ -57,6 +58,15 @@ const router = new Router({
       meta: {
         title: '七牛上传',
         requiresAuth: true,
+      }
+    },
+    {
+      path: '/draggable',
+      name: 'draggable',
+      component: Draggable,
+      meta: {
+        title: 'Vue.Draggable',
+        // requiresAuth: true,
       }
     },
     {

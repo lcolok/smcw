@@ -8,6 +8,9 @@ import router from './router'
 import i18n from './i18n'
 import store from './store'
 
+import rawDisplayer from "./vue/infra/raw-displayer.vue";
+Vue.component("rawDisplayer", rawDisplayer);
+
 import 'animate.css';
 // Vue.prototype.$Vue = Vue;
 
@@ -39,6 +42,7 @@ new Vue({
   router,
   i18n,
   store,
+
   render: h => h(App)
 }).$mount('#app')
 
