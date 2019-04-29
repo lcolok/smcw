@@ -1,7 +1,11 @@
 <template>
   <div class="row">
     <div class="col-2">
-      <button class="btn btn-secondary button" @click="sort">To original order</button>
+      <a-button class="btn btn-secondary button" @click="sort">To original order</a-button>
+      <a-button @click="editing=!editing">
+        <a-icon :type="!editing?'edit':'check-circle'" theme="filled"/>
+        {{!editing?'编辑':'完成编辑'}}
+      </a-button>
     </div>
 
     <div class="col-6">
@@ -12,7 +16,7 @@
           class="list-group"
           v-model="list"
           v-bind="dragOptions"
-          :sort="false"
+          :sort="editing"
           :move="checkMove"
           @start="drag = true"
           @end="drag = false"
@@ -25,6 +29,7 @@
             :key="element.order"
             @dragend="dragend"
             @dragenter="dragenter"
+            @dragleave="dragleave"
           >
             <i
               :class="
@@ -68,16 +73,25 @@ export default {
       list: message.map((name, index) => {
         return { name, order: index + 1 };
       }),
-      drag: false
+      drag: false,
+      editing: false,
+      lastChosen: ""
     };
   },
   methods: {
-    dragend: function(evt) {
-      // console.log("dragend",evt);
+    dragleave(evt) {
+      // console.log("dragleave", evt);
+      evt.target.classList.remove("red");
     },
-    dragenter: evt => {
+    dragend: function(evt) {
       console.log("dragend", evt);
-      console.log(evt.srcElement);
+      this.lastChosen.classList.remove("red");
+    },
+    dragenter(evt) {
+      // console.log("dragenter", evt);
+      // console.log(evt.target.style);
+      evt.target.classList.add("red");
+      this.lastChosen = evt.target;
     },
     checkMove: function(evt) {
       // console.log(evt);
@@ -107,6 +121,9 @@ export default {
 </script>
 
 <style>
+.red {
+  background-color: red;
+}
 .button {
   margin-top: 35px;
 }
