@@ -18,8 +18,9 @@
           v-bind="dragOptions"
           :sort="editing"
           :move="checkMove"
-          @start="drag = true"
+          @start="start"
           @end="drag = false"
+          :onChange="onChange"
         >
           <!-- <transition-group type="transition" :name="!drag ? 'flip-list' : null"> -->
           <a-card-grid
@@ -27,9 +28,6 @@
             class="list-group-item"
             v-for="element in list"
             :key="element.order"
-            @dragend="dragend"
-            @dragenter="dragenter"
-            @dragleave="dragleave"
           >
             <i
               :class="
@@ -79,6 +77,10 @@ export default {
     };
   },
   methods: {
+    start(evt) {
+      this.drag = true;
+      // console.log(evt);
+    },
     dragleave(evt) {
       // console.log("dragleave", evt);
       evt.target.classList.remove("red");
@@ -94,11 +96,14 @@ export default {
       this.lastChosen = evt.target;
     },
     checkMove: function(evt) {
-      // console.log(evt);
+      console.log(evt);
       return evt.draggedContext.element.name !== "apple";
     },
     sort() {
       this.list = this.list.sort((a, b) => a.order - b.order);
+    },
+    onChange(evt) {
+      console.log(evt);
     }
   },
   computed: {
@@ -107,6 +112,7 @@ export default {
         touchStartThreshold: 0, // px, how many pixels the point should move before cancelling a delayed drag event
         group: "dashboard",
         disabled: false,
+        // dragoverBubble: true,
         // ghostClass: "custom_sortable_ghost", // Class name for the drop placeholder
         // chosenClass: "custom_sortable_chosen", // Class name for the chosen item
         // dragClass: "custom_sortable_drag", // Class name for the dragging item
