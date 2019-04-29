@@ -12,6 +12,7 @@
           class="list-group"
           v-model="list"
           v-bind="dragOptions"
+          :sort="false"
           :move="checkMove"
           @start="drag = true"
           @end="drag = false"
@@ -90,12 +91,11 @@ export default {
     dragOptions() {
       return {
         touchStartThreshold: 0, // px, how many pixels the point should move before cancelling a delayed drag event
-        sort: false,
         group: "dashboard",
         disabled: false,
         // ghostClass: "custom_sortable_ghost", // Class name for the drop placeholder
         // chosenClass: "custom_sortable_chosen", // Class name for the chosen item
-        dragClass: "custom_sortable_drag", // Class name for the dragging item
+        // dragClass: "custom_sortable_drag", // Class name for the dragging item
         animation: 200, // ms, animation speed moving items when sorting, `0` — without animation
         // easing: "cubic-bezier(1, 0, 0, 1)" // Easing for animation. Defaults to null. See https://easings.net/ for examples.
         draggable: ".list-group-item", // Specifies which items inside the element should be draggable
