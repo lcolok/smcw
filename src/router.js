@@ -6,7 +6,7 @@ import NotFound from './vue/NotFound.vue'
 import Upload from './vue/Upload.vue'
 import Login from './vue/Login.vue'
 import SignUp from './vue/SignUp.vue'
-import Draggable from './vue/Draggable.vue'
+import Sortable from './vue/Sortable.vue'
 
 Vue.use(Router);
 
@@ -26,6 +26,14 @@ Vue.prototype.$AV = AV;
 const router = new Router({
   // mode: 'history',
   routes: [
+    {
+      path: '/map',
+      name: '路由表导航',
+      component: () => import('./vue/Map.vue'),
+      meta: {
+        title: '路由表导航',
+      }
+    },
     {
       path: '/login',
       name: 'login',
@@ -61,11 +69,11 @@ const router = new Router({
       }
     },
     {
-      path: '/draggable',
-      name: 'draggable',
-      component: Draggable,
+      path: '/sortable',
+      name: 'sortable',
+      component: Sortable,
       meta: {
-        title: 'Vue.Draggable',
+        title: 'Sortable',
         // requiresAuth: true,
       }
     },
@@ -102,6 +110,10 @@ const router = new Router({
     },
   ]
 })
+
+
+
+
 
 router.beforeEach((to, from, next) => {//to即将进入的目标路由对象，from当前导航正要离开的路由， next  :  下一步执行的函数钩子
   document.title = to.meta.title;//给出指定的标题名称

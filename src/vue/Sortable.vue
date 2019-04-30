@@ -50,15 +50,15 @@
 <script>
 import draggable from "vuedraggable";
 const message = [
-  "vue.draggable",
-  "draggable",
-  "component",
-  "for",
-  "vue.js 2.0",
-  "based",
-  "on",
-  "Sortablejs",
-  "apple"
+  " ",
+  " ",
+  " ",
+  " ",
+  " ",
+  " ",
+  " ",
+  " ",
+  " "
 ];
 export default {
   name: "transition-example-2",
@@ -113,7 +113,7 @@ export default {
         group: "dashboard",
         disabled: false,
         // dragoverBubble: true,
-        // ghostClass: "custom_sortable_ghost", // Class name for the drop placeholder
+        ghostClass: "custom_sortable_ghost", // Class name for the drop placeholder
         // chosenClass: "custom_sortable_chosen", // Class name for the chosen item
         // dragClass: "custom_sortable_drag", // Class name for the dragging item
         animation: 200, // ms, animation speed moving items when sorting, `0` — without animation
