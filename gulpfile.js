@@ -10,14 +10,26 @@ var gulpif = require('gulp-if');
 const changed = require('gulp-changed');
 const gap = require('gulp-append-prepend');
 var gutil = require('gulp-util');
+// var exec = require('gulp-exec');
+var exec = require('child_process').exec;
 
 
-gulp.task('default', done=>{
-    // 将你的默认的任务代码放在这
-    done();
-});
 
+gulp.task('deployLeanCloud', function (cb) {
+    exec('lean deploy', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+})
 
+gulp.task('buildNuxt', function (cb) {
+    exec('npm run build', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+})
 
 gulp.task('docs', function (callback) {
     var docsPath = 'docs/';
@@ -80,8 +92,8 @@ gulp.task('minapi', function (done) {
     done();
 });
 
-gulp.task('LeanCloudAPI', function (done) {
-    var destPath = 'serverless';
+gulp.task('buildLeanCloudAPI', function (done) {
+    var destPath = './server/api';
 
     try {
         del([
@@ -114,7 +126,7 @@ gulp.task('LeanCloudAPI', function (done) {
         // .pipe(gulpIgnore.exclude('*' + orig))//可以用于过滤文件
 
         .pipe(uglify({
-        toplevel: true,
+            toplevel: true,
         }))
         .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(gulp.dest(destPath));
@@ -161,10 +173,24 @@ gulp.task('LeanCloudAPI', function (done) {
 
 });
 
+gulp.task('getProcessEnv', function (done) {
+    done();
+});
+
 gulp.task('prepublish',
     gulp.series(
-        // done => { console.log('> gulp prepublish'); done() },//gulp 4x版本一定要"async completion" 详情请参考:http://t.cn/EXBpo2u
-        // 'minapi',
-        'LeanCloudAPI',
+        'getProcessEnv'
     )
 );
+
+
+gulp.task('default',
+    gulp.series(
+        gulp.parallel(
+            'buildLeanCloudAPI',
+            'buildNuxt'
+        ),
+
+        // 'deployLeanCloud'
+
+    ));

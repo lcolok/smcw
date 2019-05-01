@@ -1,6 +1,6 @@
 .git
 .leancloud
-api
+./api/
 #dist
 dist_electron
 docs
