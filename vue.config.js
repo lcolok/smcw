@@ -21,11 +21,19 @@ module.exports = {
     }
   },
 
-  /*   devServer: {
-      contentBase: path.join(__dirname, 'devDist'),
-      compress: true,
-      port: 9000
-    }, */
+  devServer: {
+    /*       contentBase: path.join(__dirname, 'devDist'),
+          compress: true,
+          port: 9000 */
+    before: function (app, server) {
+      var exec = require('child_process').exec;
+      exec('lean up', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+      })
+    }
+  },
 
 
   /*   configureWebpack: config => {
