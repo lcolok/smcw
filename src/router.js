@@ -123,7 +123,7 @@ const routes = [
 importPages(require.context('./vue', false, /\.vue$/, 'lazy'))
 function importPages(r) {
   r.keys().forEach(key => {
-  console.log(r(key));
+  console.log(r(key).default);
 
     var path = (key.toLowerCase().split('.'))[1];
     var title = (key.split('.'))[1].split('/')[1];

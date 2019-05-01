@@ -1,12 +1,11 @@
 {
   "ignore": [
-    "views/*",
+    "src/*",
     "public/*",
-    "apiMin/*",
-    ".git",
-    "serverless"
+    "server/api/*",
+    ".git"
   ],
   "events": {
-    "restart": "gulp prepublish"
+    "restart": "gulp buildLeanCloudAPI"
   }
 }
