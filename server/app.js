@@ -31,7 +31,13 @@ var app = express();
 
 app.use(compression());
 
-var distPath = path.join(__dirname, '../dist');
+var distPath;
+if (process.env.npm_lifecycle_event == 'dev') {
+    distPath = path.join(__dirname, '../dist');
+} else {
+    distPath = path.join(__dirname, '../dist');
+}
+
 
 // 设置模板引擎
 app.set('views', distPath);

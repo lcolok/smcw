@@ -73,7 +73,7 @@ gulp.task('buildLeanCloudAPI', function (done) {
         .pipe(replace(/thisFunc/igm, function () {
             return this.file.relative.split('.').shift();
         }))
-        .pipe(stripDebug())
+        // .pipe(stripDebug())//删除所有console
         .pipe(concat('bundle.min.js'))
         .pipe(gap.prependText(`var AV = require('leanengine');var requestJS = require('request');`))//统一加上需要引入的函数库
         // .pipe(minify({

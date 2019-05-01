@@ -4,18 +4,19 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import AV from 'leancloud-storage'
-
-import current_app_id from '!raw-loader!../.leancloud/current_app_id';
-import current_app_key from '!raw-loader!../.leancloud/current_app_key';
-
-AV.init({
-  appId: current_app_id,
-  appKey: current_app_key,
-})
+import AV from './plugins/AVinit'
 
 Vue.prototype.$AV = AV;
 
+// AV.Cloud.run='hahaha'
+console.log(AV.Cloud.run);
+function newRun(e, n, r) {
+  return o(
+    { service: "engine", method: "POST", path: "/functions/" + e, data: t._encode(n, null, !0), authOptions: r }
+  ).then(
+    function (e) { return t._decode(e).result }
+  )
+}
 
 // const router = new Router({
 //   // mode: 'history',
@@ -123,11 +124,11 @@ const routes = [
 importPages(require.context('./vue', false, /\.vue$/, 'lazy'))
 function importPages(r) {
   r.keys().forEach(key => {
-  console.log(r(key).default);
+    console.log(r(key).default);
 
     var path = (key.toLowerCase().split('.'))[1];
     var title = (key.split('.'))[1].split('/')[1];
- 
+
     routes.push({
       path: path,
       component: () => r(key),

@@ -1,15 +1,12 @@
 const CompressionPlugin = require("compression-webpack-plugin")
 const productionGzipExtensions = ['js', 'html', 'css']
-
+var path = require('path');
 
 
 module.exports = {
-  outputDir: undefined,
   publicPath: './',
   assetsDir: 'assets',
-  runtimeCompiler: undefined,
-  productionSourceMap: undefined,
-  parallel: undefined,
+
   css: {
     loaderOptions: {
       less: {
@@ -24,20 +21,27 @@ module.exports = {
     }
   },
 
-/*   configureWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      return {
-        plugins: [
-          new CompressionPlugin({
-            test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-            threshold: 10240,//对超过10k的数据压缩
-            deleteOriginalAssets: false //不删除源文件
-          })
-        ]
-      }
-    }
+  /*   devServer: {
+      contentBase: path.join(__dirname, 'devDist'),
+      compress: true,
+      port: 9000
+    }, */
 
-  }, */
+
+  /*   configureWebpack: config => {
+      if (process.env.NODE_ENV === 'production') {
+        return {
+          plugins: [
+            new CompressionPlugin({
+              test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+              threshold: 10240,//对超过10k的数据压缩
+              deleteOriginalAssets: false //不删除源文件
+            })
+          ]
+        }
+      }
+
+    }, */
 
   pluginOptions: {
     i18n: {
@@ -48,7 +52,5 @@ module.exports = {
     }
   },
 
-  lintOnSave: undefined,
-
-
+  lintOnSave: undefined
 }

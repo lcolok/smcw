@@ -52,6 +52,7 @@ export default {
           abort
         ) => {
           console.log(file);
+
           var QJ = await this.$AV.Cloud.run("getQiniuJSON", {
             fileNameArr: [file.name]
           });
