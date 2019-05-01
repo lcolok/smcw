@@ -1,5 +1,5 @@
 .git
-.leancloud
+#.leancloud
 ./api/
 #dist
 dist_electron
