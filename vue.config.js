@@ -3,6 +3,33 @@ const productionGzipExtensions = ['js', 'html', 'css']
 var path = require('path');
 
 
+function leanUp(){
+
+/*       var exec = require('child_process').exec;
+      var leanUpProcess = exec('lean up');
+
+      leanUpProcess.stdout.on('data', function (data) {
+        console.log(data);
+      }); */
+
+
+      var spawn = require('child_process').spawn,
+      ls = spawn('lean',['up'], { stdio: 'inherit' });
+
+    ls.stdout.on('data', function (data) {
+      console.log('stdout: ' + data.toString());
+    });
+
+    ls.stderr.on('data', function (data) {
+      console.log('stderr: ' + data.toString());
+    });
+
+    ls.on('exit', function (code) {
+      console.log('child process exited with code ' + code.toString());
+    });
+
+}
+
 module.exports = {
   publicPath: './',
   assetsDir: 'assets',
@@ -26,30 +53,7 @@ module.exports = {
           compress: true,
           port: 9000 */
     before: function (app, server) {
-
-/*       var exec = require('child_process').exec;
-      var leanUpProcess = exec('lean up');
-
-      leanUpProcess.stdout.on('data', function (data) {
-        console.log(data);
-      }); */
-
-
-            var spawn = require('child_process').spawn,
-              ls = spawn('lean',['up'], { stdio: 'inherit' });
-      
-            ls.stdout.on('data', function (data) {
-              console.log('stdout: ' + data.toString());
-            });
-      
-            ls.stderr.on('data', function (data) {
-              console.log('stderr: ' + data.toString());
-            });
-      
-            ls.on('exit', function (code) {
-              console.log('child process exited with code ' + code.toString());
-            });
-
+      // leanUp()
     },
     clientLogLevel: 'warning'
   },
