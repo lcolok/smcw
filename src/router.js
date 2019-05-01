@@ -8,15 +8,8 @@ import AV from './plugins/AVinit'
 
 Vue.prototype.$AV = AV;
 
-// AV.Cloud.run='hahaha'
-console.log(AV.Cloud.run);
-function newRun(e, n, r) {
-  return o(
-    { service: "engine", method: "POST", path: "/functions/" + e, data: t._encode(n, null, !0), authOptions: r }
-  ).then(
-    function (e) { return t._decode(e).result }
-  )
-}
+AV._setServerURLs('http://localhost:3000/')//设置本地服务器端口(必须先进行 lean up 操作)
+
 
 // const router = new Router({
 //   // mode: 'history',
