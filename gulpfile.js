@@ -12,6 +12,23 @@ const gap = require('gulp-append-prepend');
 var gutil = require('gulp-util');
 // var exec = require('gulp-exec');
 var exec = require('child_process').exec;
+var gulp = require('gulp');
+var nodemon = require('gulp-nodemon');
+
+
+
+var browserSync = require('browser-sync').create();
+
+gulp.task('serve', function(){
+    browserSync.init({
+    proxy: 'http://localhost:3000',
+    browser: 'chrome',
+    port: 7000
+  });
+
+    gulp.watch('public/**/*.+(scss|jade|ls)')
+    .on('change', browserSync.reload);
+});
 
 
 

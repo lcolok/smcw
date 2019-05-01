@@ -27,7 +27,7 @@ export default {
   name: "routerMap",
   components: {},
   data() {
-    console.log("data", this.$router);
+    console.log("All Routers", this.$router);
 
     return {
       iconOption: {
