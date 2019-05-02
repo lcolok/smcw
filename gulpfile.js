@@ -61,26 +61,13 @@ gulp.task('buildLeanCloudAPI', function (done) {
         ]);
     } catch (e) { console.log(e); }
 
-    function getAR(path) {
-        var ar = fs.readFileSync(__dirname + path);
-        var arJSON = JSON.parse(ar);
-        var arPrependText = '';
-        // console.log(arJSON);
-        for (var i in arJSON.requires) {
-            arPrependText += `const ${i} = require('${arJSON.requires[i]}');`
-        }
-        return arPrependText
-        // console.log(arPrependText);
-    }
 
     var orig = '-debug.js';
     gulp.src('api/*.js')//只读取根目录的js文件
         // .pipe(gulpIgnore.exclude('public/**/*'))//用于过滤public文件
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
-        .pipe(gap.appendText(`
-        AV_Cloud_Define("thisFunc",r=>thisFunc(r));
-        `))
+        .pipe(gap.appendText(`AV_Cloud_Define("thisFunc",r=>thisFunc(r));`))
         .pipe(replace(/thisFunc/igm, function () {
             return this.file.relative.split('.').shift();
         }))
@@ -97,14 +84,25 @@ gulp.task('buildLeanCloudAPI', function (done) {
         // }))
         // .pipe(gulpIgnore.exclude('*' + orig))//可以用于过滤文件
 
-        // .pipe(uglify({
-        //     toplevel: true,
-        // }))
+        .pipe(uglify({
+            toplevel: true,
+        }))
         .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(gulp.dest(destPath));
     // console.log('minapi任务已完成');
     done();
 
+    function getAR(path) {
+        var ar = fs.readFileSync(__dirname + path);
+        var arJSON = JSON.parse(ar);
+        var arPrependText = '';
+        // console.log(arJSON);
+        for (var i in arJSON.requires) {
+            arPrependText += `const ${i} = require('${arJSON.requires[i]}');`
+        }
+        return arPrependText
+        // console.log(arPrependText);
+    }
 
     function CG() {
 
