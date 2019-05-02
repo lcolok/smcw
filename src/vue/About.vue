@@ -6,8 +6,8 @@
 
 <script>
 export default {
-    meta: {
+  meta: {
     title: "关于"
-  },
-}
+  }
+};
 </script>

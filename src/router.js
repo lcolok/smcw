@@ -100,24 +100,39 @@ if (process.env.NODE_ENV == "development") {//如果是处于开发状态的话
 
 // })
 
+const routes = []
 
-
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('./vue/Home.vue'),
-    meta: {
-      title: '首页入口',
-      // requiresAuth: true,
-    }
-  },
-];
+// const routes = [
+//   {
+//     path: '/',
+//     name: 'home',
+//     component: () => import('./vue/Home.vue'),
+//     meta: {
+//       title: '首页入口',
+//       // requiresAuth: true,
+//     }
+//   },
+// ];
 
 importPages(require.context('./vue', false, /\.vue$/))
 function importPages(r) {
-  r.keys().forEach(key => {
 
+  var arr = r.keys();
+  arr.sort((a, b) => {
+    if (a.match(/NotFound/ig)) {
+      return -1
+    } else {
+      return 1
+    }
+  }).sort((a, b) => {
+    if (b.match(/Home/ig)) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+  arr.forEach(key => {
+    var meta = r(key).default.meta;
     // console.log(r(key).default);
 
     var filePath = (key.split('.'))[1];
@@ -125,23 +140,23 @@ function importPages(r) {
     // var title = (key.split('.'))[1].split('/')[1];
 
     routes.push({
-      path: filePath,
+      path: meta.staticPath || filePath,//如果有静态路径则用静态路径
       component: () => import("./vue" + filePath),
-      meta:r(key).default.meta
+      meta: meta
     })
   });
 }
 
-routes.push({
-  /* Not Found 路由，必须是最后一个路由 */
-  path: '*',
-  name: 'NotFound',
-  component: () => import('./vue/NotFound.vue'),
-  meta: {
-    title: '404 Not Found',
-    // hideOnTheMap: true
-  }
-})
+// routes.push({
+//   /* Not Found 路由，必须是最后一个路由 */
+//   path: '*',
+//   name: 'NotFound',
+//   component: () => import('./vue/NotFound.vue'),
+//   meta: {
+//     title: '404 Not Found',
+//     // hideOnTheMap: true
+//   }
+// })
 
 const router = new Router({
   routes: routes

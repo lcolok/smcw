@@ -4,6 +4,7 @@
 <script>
 export default {
   meta: {
+    staticPath:"/",
     title: "主页"
   },
   created() {
