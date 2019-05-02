@@ -32,7 +32,7 @@ gulp.task('buildLeanCloudAPI', function (done) {
         // .pipe(stripDebug())//删除所有console
         .pipe(concat('bundle.min.js'))
         .pipe(gap.prependText("var AV_Cloud_Define=AV.Cloud.define"))
-        .pipe(gap.prependText(getAR(path.resolve(__dirname, '../api/api.config.js'))))//统一加上需要引入的函数库
+        .pipe(gap.prependText(getAR(path.resolve(__dirname, '../api/config/api.config.js'))))//统一加上需要引入的函数库
 
         // .pipe(minify({
         //     ext: {
