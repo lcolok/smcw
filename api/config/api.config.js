@@ -3,6 +3,7 @@ module.exports = {
         "AV": "leanengine",
         "requestJS": "request"
     },
-    "apiBuildDest": "./server/serverless"
+    "apiBuildDest": "./server/serverless",
+    "bundleName":"api.min.js",
 
 }

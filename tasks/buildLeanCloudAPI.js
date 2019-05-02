@@ -12,17 +12,15 @@ let uglify = require('gulp-uglify-es').default;
 gulp.task('buildLeanCloudAPI', function (done) {
 
     var configPath = path.resolve(__dirname, '../api/config/api.config.js');
-    var apiBuildDest = require(configPath).apiBuildDest;
-    var destPath = apiBuildDest;
+    var config = require(configPath);
+
+    var destPath = config.apiBuildDest;
 
     try {
         del([
             destPath
         ]);
     } catch (e) { console.log(e); }
-
-
-
 
     var orig = '-debug.js';
     gulp.src('api/*.js')//只读取根目录的js文件
@@ -35,9 +33,9 @@ gulp.task('buildLeanCloudAPI', function (done) {
             return this.file.relative.split('.').shift();//获取文件名
         }))
         // .pipe(stripDebug())//删除所有console
-        .pipe(concat('bundle.min.js'))
+        .pipe(concat(config.bundleName))
         .pipe(gap.prependText("var AV_Cloud_Define=AV.Cloud.define"))
-        .pipe(gap.prependText(getAllRequires(configPath)))//统一加上需要引入的函数库
+        .pipe(gap.prependText(getAllRequires(config)))//统一加上需要引入的函数库
 
         // .pipe(minify({
         //     ext: {
@@ -55,13 +53,12 @@ gulp.task('buildLeanCloudAPI', function (done) {
     // console.log('minapi任务已完成');
     done();
 
-    function getAllRequires(path) {
+    function getAllRequires(config) {
         // var ar = fs.readFileSync(path);
-        var arJSON = require(path);
         var arPrependText = '';
         // console.log(arJSON);
-        for (var i in arJSON.requires) {
-            arPrependText += `const ${i} = require('${arJSON.requires[i]}');`
+        for (var i in config.requires) {
+            arPrependText += `const ${i} = require('${config.requires[i]}');`
         }
         return arPrependText
         // console.log(arPrependText);

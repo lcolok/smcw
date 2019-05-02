@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "gulp buildLeanCloudAPI && nodemon ./server/index.js",
+    "dev": "nodemon ./server/index.js",
     "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
     "start": "node ./server/index.js"
@@ -21,6 +21,7 @@
     "babel-plugin-import": "^1.11.0",
     "body-parser": "^1.18.3",
     "browser-sync": "^2.26.5",
+    "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
     "compression": "^1.7.4",
     "compression-webpack-plugin": "^2.0.0",

@@ -10,7 +10,7 @@
     ".git"
   ],
   "events": {
-    "exit": "gulp buildLeanCloudAPI"
+
   },
   "restartable":"rs"
 }

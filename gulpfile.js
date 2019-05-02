@@ -18,6 +18,14 @@ gulp.task('deploy',
         'deployLeanCloud'
     ));
 
+gulp.task('dev',
+    gulp.series(
+        gulp.parallel(
+            'buildLeanCloudAPI',
+        ),
+        'leanUp'
+    ));
+
 gulp.task('default',
     cb => {
         cb();
