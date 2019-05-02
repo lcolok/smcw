@@ -18,21 +18,22 @@ gulp.task('buildLeanCloudAPI', function (done) {
         ]);
     } catch (e) { console.log(e); }
 
+    var configPath = path.resolve(__dirname, '../api/config/api.config.js');
 
     var orig = '-debug.js';
     gulp.src('api/*.js')//只读取根目录的js文件
         // .pipe(gulpIgnore.exclude('public/**/*'))//用于过滤public文件
-        .pipe(gulpIgnore.exclude('api.config.js'))//用于过滤api.config.js
+        .pipe(gulpIgnore.exclude(['api.config.js']))//用于过滤api.config.js
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(gap.appendText(`AV_Cloud_Define("thisFunc",r=>thisFunc(r));`))
         .pipe(replace(/thisFunc/igm, function () {
-            return this.file.relative.split('.').shift();
+            return this.file.relative.split('.').shift();//获取文件名
         }))
         // .pipe(stripDebug())//删除所有console
         .pipe(concat('bundle.min.js'))
         .pipe(gap.prependText("var AV_Cloud_Define=AV.Cloud.define"))
-        .pipe(gap.prependText(getAR(path.resolve(__dirname, '../api/config/api.config.js'))))//统一加上需要引入的函数库
+        .pipe(gap.prependText(getAllRequires(configPath)))//统一加上需要引入的函数库
 
         // .pipe(minify({
         //     ext: {
@@ -50,7 +51,7 @@ gulp.task('buildLeanCloudAPI', function (done) {
     // console.log('minapi任务已完成');
     done();
 
-    function getAR(path) {
+    function getAllRequires(path) {
         // var ar = fs.readFileSync(path);
         var arJSON = require(path);
         var arPrependText = '';
