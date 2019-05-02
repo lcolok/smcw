@@ -1,6 +1,8 @@
 var requireDir = require('require-dir');
 var dir = requireDir('./tasks');
 var gulp = require('gulp');
+const child_process = require('child_process');
+const exec = child_process.exec;
 
 gulp.task('deployLeanCloud', function (cb) {
     exec('lean deploy', function (err, stdout, stderr) {
