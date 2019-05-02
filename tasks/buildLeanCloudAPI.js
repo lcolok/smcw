@@ -10,7 +10,10 @@ let uglify = require('gulp-uglify-es').default;
 
 
 gulp.task('buildLeanCloudAPI', function (done) {
-    var destPath = './server/api';
+
+    var configPath = path.resolve(__dirname, '../api/config/api.config.js');
+    var apiBuildDest = require(configPath).apiBuildDest;
+    var destPath = apiBuildDest;
 
     try {
         del([
@@ -18,7 +21,8 @@ gulp.task('buildLeanCloudAPI', function (done) {
         ]);
     } catch (e) { console.log(e); }
 
-    var configPath = path.resolve(__dirname, '../api/config/api.config.js');
+
+
 
     var orig = '-debug.js';
     gulp.src('api/*.js')//只读取根目录的js文件

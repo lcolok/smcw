@@ -16,8 +16,12 @@ if (fs.existsSync(minPath)) {
   apiPath = minPath;
 } */
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
+
+
+var apiBuildDest = require(path.resolve('api/config/api.config.js')).apiBuildDest;
+
 require('require-all')({
-    dirname: __dirname + '/api',
+    dirname: path.resolve(apiBuildDest),
     excludeDirs: /^public$/,
     filter: function (fileName) {
         if (fileName == 'tempCodeRunnerFile.js') return; //排除掉tempCodeRunnerFile.js这种临时生成的文件

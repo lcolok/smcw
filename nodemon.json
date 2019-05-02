@@ -6,6 +6,7 @@
   "ignore": [
     "public/*",
     "server/api/*",
+    "server/serverless/*",
     ".git"
   ],
   "events": {
