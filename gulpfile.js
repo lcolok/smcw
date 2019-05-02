@@ -61,14 +61,17 @@ gulp.task('buildLeanCloudAPI', function (done) {
         ]);
     } catch (e) { console.log(e); }
 
-    var allRequires = fs.readFileSync(__dirname + '/api/allRequires.json');
-    var allRequiresJSON = JSON.parse(allRequires);
-    var allRequiresPrependText='';
-    // console.log(allRequiresJSON);
-    for(var i in allRequiresJSON){
-        allRequiresPrependText +=`const ${i} = require('${allRequiresJSON[i]}');`
+    function getAR(path) {
+        var ar = fs.readFileSync(__dirname + path);
+        var arJSON = JSON.parse(ar);
+        var arPrependText = '';
+        // console.log(arJSON);
+        for (var i in arJSON.requires) {
+            arPrependText += `const ${i} = require('${arJSON.requires[i]}');`
+        }
+        return arPrependText
+        // console.log(arPrependText);
     }
-    // console.log(allRequiresPrependText);
 
     var orig = '-debug.js';
     gulp.src('api/*.js')//只读取根目录的js文件
@@ -76,14 +79,16 @@ gulp.task('buildLeanCloudAPI', function (done) {
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(gap.appendText(`
-        AV.Cloud.define("thisFunc",r=>thisFunc(r));
+        AV_Cloud_Define("thisFunc",r=>thisFunc(r));
         `))
         .pipe(replace(/thisFunc/igm, function () {
             return this.file.relative.split('.').shift();
         }))
         // .pipe(stripDebug())//删除所有console
         .pipe(concat('bundle.min.js'))
-        .pipe(gap.prependText(allRequiresPrependText))//统一加上需要引入的函数库
+        .pipe(gap.prependText("var AV_Cloud_Define=AV.Cloud.define"))
+        .pipe(gap.prependText(getAR('/api/allRequires.json')))//统一加上需要引入的函数库
+
         // .pipe(minify({
         //     ext: {
         //         src: orig,//源文件的后缀

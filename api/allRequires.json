@@ -1,4 +1,7 @@
 {
-    "AV": "leanengine",
-    "requestJS": "request"
+    "requires": {
+        "AV": "leanengine",
+        "requestJS": "request"
+    }
+
 }
