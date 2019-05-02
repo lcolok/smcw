@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var del = require('del');
 var concat = require('gulp-concat');
@@ -19,15 +20,15 @@ var nodemon = require('gulp-nodemon');
 
 var browserSync = require('browser-sync').create();
 
-gulp.task('serve', function(){
+gulp.task('serve', function () {
     browserSync.init({
-    proxy: 'http://localhost:3000',
-    browser: 'chrome',
-    port: 7000
-  });
+        proxy: 'http://localhost:3000',
+        browser: 'chrome',
+        port: 7000
+    });
 
     gulp.watch('public/**/*.+(scss|jade|ls)')
-    .on('change', browserSync.reload);
+        .on('change', browserSync.reload);
 });
 
 
@@ -60,8 +61,17 @@ gulp.task('buildLeanCloudAPI', function (done) {
         ]);
     } catch (e) { console.log(e); }
 
+    var allRequires = fs.readFileSync(__dirname + '/api/allRequires.json');
+    var allRequiresJSON = JSON.parse(allRequires);
+    var allRequiresPrependText='';
+    // console.log(allRequiresJSON);
+    for(var i in allRequiresJSON){
+        allRequiresPrependText +=`const ${i} = require('${allRequiresJSON[i]}');`
+    }
+    // console.log(allRequiresPrependText);
+
     var orig = '-debug.js';
-    gulp.src('api/**/*.js')
+    gulp.src('api/*.js')//只读取根目录的js文件
         // .pipe(gulpIgnore.exclude('public/**/*'))//用于过滤public文件
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
@@ -75,7 +85,7 @@ gulp.task('buildLeanCloudAPI', function (done) {
         }))
         // .pipe(stripDebug())//删除所有console
         .pipe(concat('bundle.min.js'))
-        .pipe(gap.prependText(`var AV = require('leanengine');var requestJS = require('request');`))//统一加上需要引入的函数库
+        .pipe(gap.prependText(allRequiresPrependText))//统一加上需要引入的函数库
         // .pipe(minify({
         //     ext: {
         //         src: orig,//源文件的后缀
