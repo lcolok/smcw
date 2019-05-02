@@ -3,30 +3,30 @@ const productionGzipExtensions = ['js', 'html', 'css']
 var path = require('path');
 
 
-function leanUp(){
+function leanUp() {
 
-/*       var exec = require('child_process').exec;
-      var leanUpProcess = exec('lean up');
+  /*       var exec = require('child_process').exec;
+        var leanUpProcess = exec('lean up');
+  
+        leanUpProcess.stdout.on('data', function (data) {
+          console.log(data);
+        }); */
 
-      leanUpProcess.stdout.on('data', function (data) {
-        console.log(data);
-      }); */
 
+  var spawn = require('child_process').spawn,
+    ls = spawn('lean', ['up'], { stdio: 'inherit' });
 
-      var spawn = require('child_process').spawn,
-      ls = spawn('lean',['up'], { stdio: 'inherit' });
+  ls.stdout.on('data', function (data) {
+    console.log('stdout: ' + data.toString());
+  });
 
-    ls.stdout.on('data', function (data) {
-      console.log('stdout: ' + data.toString());
-    });
+  ls.stderr.on('data', function (data) {
+    console.log('stderr: ' + data.toString());
+  });
 
-    ls.stderr.on('data', function (data) {
-      console.log('stderr: ' + data.toString());
-    });
-
-    ls.on('exit', function (code) {
-      console.log('child process exited with code ' + code.toString());
-    });
+  ls.on('exit', function (code) {
+    console.log('child process exited with code ' + code.toString());
+  });
 
 }
 
@@ -55,7 +55,7 @@ module.exports = {
     before: function (app, server) {
       // leanUp()
     },
-    clientLogLevel: 'warning'
+    clientLogLevel: 'none'//string: 'none' | 'info' | 'error' | 'warning'
   },
 
 
