@@ -54,6 +54,7 @@
     "qiniu-js": "^2.5.4",
     "request": "^2.88.0",
     "require-all": "^3.0.0",
+    "v-emoji-picker": "^1.1.2",
     "vue": "^2.6.6",
     "vue-filepond": "^5.1.0",
     "vue-i18n": "^8.0.0",
