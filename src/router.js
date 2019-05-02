@@ -114,20 +114,20 @@ const routes = [
   },
 ];
 
-importPages(require.context('./vue', false, /\.vue$/, 'lazy'))
+importPages(require.context('./vue', false, /\.vue$/))
 function importPages(r) {
   r.keys().forEach(key => {
-    console.log(r(key).default);
 
-    var path = (key.toLowerCase().split('.'))[1];
-    var title = (key.split('.'))[1].split('/')[1];
+    // console.log(r(key).default);
+
+    var filePath = (key.split('.'))[1];
+    // var path = (key.toLowerCase().split('.'))[1];
+    // var title = (key.split('.'))[1].split('/')[1];
 
     routes.push({
-      path: path,
-      component: () => r(key),
-      meta: {
-        title: title
-      }
+      path: filePath,
+      component: () => import("./vue" + filePath),
+      meta:r(key).default.meta
     })
   });
 }
@@ -159,7 +159,7 @@ router.beforeEach((to, from, next) => {//to即将进入的目标路由对象，f
     if (to.meta.requiresAuth && !AV.User.current()) {
       console.log('还没登录');
       next({
-        name: 'login',
+        path: 'login',
         query: {
           redirect: to.fullPath//留下原来要到达的路径信息，等用户登录好之后，再进行跳转
         }

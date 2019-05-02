@@ -61,6 +61,10 @@
 
 <script>
 export default {
+  name: "login",
+  meta: {
+    title: "登录"
+  },
   directives: {
     focusNextOnEnter: {
       bind: function(el, { value }, vnode) {

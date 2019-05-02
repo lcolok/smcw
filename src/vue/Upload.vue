@@ -37,6 +37,9 @@ const FilePond = vueFilePond(
 );
 
 export default {
+  meta: {
+    title: "上传测试页"
+  },
   name: "app",
   data: function() {
     return {

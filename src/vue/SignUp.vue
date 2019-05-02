@@ -63,6 +63,9 @@
 
 <script>
 export default {
+  meta: {
+    title: "注册页"
+  },
   directives: {
     focus: {
       inserted: function(el, obj) {

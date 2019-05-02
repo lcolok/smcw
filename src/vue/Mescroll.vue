@@ -13,6 +13,9 @@ import MescrollVue from "mescroll.js/mescroll.vue";
 
 export default {
   name: "xxx",
+  meta: {
+    title: "mescroll测试页"
+  },
   components: {
     MescrollVue // 注册mescroll组件
   },

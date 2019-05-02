@@ -49,18 +49,11 @@
 
 <script>
 import draggable from "vuedraggable";
-const message = [
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " ",
-  " "
-];
+const message = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 export default {
+  meta: {
+    title: "Sortable测试页"
+  },
   name: "transition-example-2",
   display: "Transitions",
   components: {

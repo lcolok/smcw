@@ -16,6 +16,9 @@
 
 <script>
 export default {
+  meta: {
+    title: "前后端互通测试页"
+  },
   data() {
     return {};
   },

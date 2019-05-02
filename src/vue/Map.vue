@@ -6,7 +6,9 @@
 import routerMap from "@/components/routerMap.vue";
 
 export default {
-  name: "Home",
+  meta: {
+    title: "路由导航"
+  },
   components: {
     routerMap
   },

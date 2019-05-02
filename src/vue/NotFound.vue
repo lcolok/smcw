@@ -23,6 +23,9 @@ import HelloI18n from "@/components/HelloI18n.vue";
 
 export default {
   name: "Home",
+  meta: {
+    title: "404"
+  },
   components: {
     HelloWorld,
     HelloI18n
