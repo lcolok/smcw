@@ -76,9 +76,7 @@ gulp.task('buildLeanCloudAPI', function (done) {
         .pipe(replace(/\/\*([\S]*CRISPR-GULP[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(replace(/\/\*([\S]*CG[\S]*)\*\/([\s\S]*?)(\/\*\1\*\/)/igm, (...res) => CG(res)))
         .pipe(gap.appendText(`
-        AV.Cloud.define("thisFunc", async function (request) {
-            return await thisFunc(request);
-        });
+        AV.Cloud.define("thisFunc",r=>thisFunc(r));
         `))
         .pipe(replace(/thisFunc/igm, function () {
             return this.file.relative.split('.').shift();
