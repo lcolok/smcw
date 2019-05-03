@@ -9,7 +9,7 @@ public
 #routes
 #serverless
 src
-tools
+#tools
 .env
 .gitattributes
 .gitconfig

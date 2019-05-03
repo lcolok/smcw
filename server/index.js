@@ -16,28 +16,57 @@ ls.stderr.on('data', (data) => {
 
 ls.on('close', (code) => {
   console.log(`child process exited with code ${code}`);
-
   main();
-
-
 }); */
 
+// 引入工具模块
+var ProgressBar = require('../tools/progress-bar');
+
+// 初始化一个进度条长度为 50 的 ProgressBar 实例
+const pb = new ProgressBar({
+  description: 'Gulp Dev',
+  length: 25,
+  theme_color: 'green',
+  total: 200
+});
+
+
+/* var num = 0, total = 200;
+function devBuild() {
+  if (num <= total) {
+    // 更新进度条
+    pb.render({ completed: num, total: total });
+
+    num++;
+    setTimeout(function () {
+      devBuild();
+    }, 2)
+  }
+}
+devBuild(); */
+
+
 if (process.env.npm_lifecycle_event === 'dev') {
-  exec('gulp dev', function (error, stdout, stderr) {
-    if (error) {
-      console.error('error: ' + error);
-      return;
-    }
-    /*   console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr); */
-    console.log(chalk.keyword('orange').bold('Gulp Dev Finished!'));
-    main();
+
+
+
+  var cmd = exec('gulp dev');
+
+  cmd.on('error', () => {
+    console.log('error');
+  })
+  cmd.on('exit', () => {
+    pb.motionRender(0, 100)
+  
+ 
+      main();
+      pb.motionRender(100, 200);
 
   })
-}else{
+
+} else {
   main();
 }
-
 
 
 
@@ -70,7 +99,7 @@ function main() {
 
   var app = require('./app');
   app.listen(PORT, function (err) {
-    console.log('Node app is running on:', `${chalk.yellow('http://localhost:' + PORT)}`);
+    console.log(chalk.green.inverse(` READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
 
     // 注册全局未捕获异常处理器
     process.on('uncaughtException', function (err) {
