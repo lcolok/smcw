@@ -21,22 +21,46 @@ function portIsOccupied(port) {
             }
         }) */
 
+    // axios.get(`http://localhost:${port}`, {
+    //     params: {
+
+    //     }
+    // })
+    //     .then(function (response) {
+    //         // console.log(response.headers.etag);
+    //         if (response.headers.etag == `W/"665-BkYaAS0FaeL/9rTmpnxKwmu3L5Y"`){
+    //           tellReady(port);
+    //         }
+    //         fs.writeFileSync(__dirname + '/catchFeatures.json', CircularJSON.stringify(response, null, '\t'));
+    //     })
+    //     .catch(function (error) {
+    //         // console.log(error);
+    //         // console.log("并没有"+port);
+    //     });
+
+
     axios.get(`http://localhost:${port}`, {
         params: {
 
         }
     })
         .then(function (response) {
+
             // console.log(response.headers.etag);
-            if (response.headers.etag == `W/"665-BkYaAS0FaeL/9rTmpnxKwmu3L5Y"`){
-                console.log(chalk.green.inverse(` CLIENT READY `) + ' ' + 'Vue App running at', `${chalk.green('http://localhost:' + port)}`);
+            if (response.data.match('看到这句话你就知道它正在开发中|特殊编号:Vue_Vuetify_LCO_Dev')) {
+                tellReady(port)
             }
-            fs.writeFile(__dirname + '/data.json', CircularJSON.stringify(response, null, '\t'));
+
         })
         .catch(function (error) {
-            // console.log(error);
+            // console.log(error.status);
             // console.log("并没有"+port);
         });
+
+    function tellReady(currentPort) {
+        console.log(chalk.green.inverse(` CLIENT READY `) + ' ' + 'Vue App running at', `${chalk.green('http://localhost:' + currentPort)}`);
+    }
+
 }
 
 module.exports = portIsOccupied
