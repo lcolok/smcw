@@ -23,7 +23,7 @@ function ProgressBar() {
         var cell_num = Math.floor(percent * this.length);             // 计算需要多少个 █ 符号来拼凑图案
 
 
-        var cell = empty = processBar = status = statusICON = details = '';
+        var cell = empty = processBar = status = statusICON = details = rate = '';
         if (percent < 1) {//还没完成的时候
             // 拼接黑色条
             for (var i = 0; i < cell_num; i++) {
@@ -38,6 +38,7 @@ function ProgressBar() {
             processBar = ' ' + chalk`{${this.theme_color} ${cell}}` + chalk`{white ${empty}}`;
             status = 'Building';
             statusICON = '●';
+            // rate = `${opts.completed}/${opts.total}`;
         } else {
             status = 'Completed';
             statusICON = '✔';
@@ -48,12 +49,12 @@ function ProgressBar() {
         }
 
         // 拼接最终文本
-        var cmdText = chalk`{${this.theme_color} ${statusICON} ${this.description}}${processBar} ${status}(${(100 * percent).toFixed(0)}%) ${opts.completed}/${opts.total}`
+        var cmdText = chalk`{${this.theme_color} ${statusICON} ${this.description}}${processBar} ${status}(${(100 * percent).toFixed(0)}%) ${rate}`
 
         var detailsText = chalk`{grey ${details}}`
 
         // 在单行输出文本
-        slog('\n' + cmdText + '\n' + detailsText + '\n\n');
+        slog('' + cmdText + ' ' + detailsText + '\n');
     };
 
     this.motionRender = function () {

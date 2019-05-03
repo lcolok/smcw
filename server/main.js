@@ -31,7 +31,7 @@ function main() {
     app.listen(PORT, function (err) {
         setTimeout(() => {
             console.log(chalk.green.inverse(` READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
-        }, 500);
+        }, 200);
         // 注册全局未捕获异常处理器
         process.on('uncaughtException', function (err) {
             console.error('Caught exception:', err.stack);
