@@ -135,7 +135,7 @@ function importPages(r) {
 
     routes
       .sort((a, b) => {//按照自定义的优先级来排序
-        console.log(a.meta.order);
+        // console.log(a.meta.order);
         if ((a.meta.order||-1) < (b.meta.order||-1)) {
           return -1
         } else {

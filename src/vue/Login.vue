@@ -66,21 +66,7 @@ export default {
     title: "登录",
     order: 100
   },
-  directives: {
-    focusNextOnEnter: {
-      bind: function(el, { value }, vnode) {
-        el.addEventListener("keyup", ev => {
-          if (ev.keyCode === 13) {
-            let nextInput = vnode.context.$refs[value];
-            if (nextInput && typeof nextInput.focus === "function") {
-              nextInput.focus();
-              nextInput.select();
-            }
-          }
-        });
-      }
-    }
-  },
+
   data: () => ({
     show: true,
     passwordError: true,

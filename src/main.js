@@ -1,6 +1,7 @@
 import Vue from "vue";
 Vue.config.productionTip = false
 
+import './plugins/directives'
 import './plugins/antd'
 // import './plugins/lottie'
 import App from './App.vue'
