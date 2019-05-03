@@ -11,7 +11,7 @@
                 @click="$router.push({path:item.path})"
                 :disabled="$router.currentRoute.fullPath==item.path"
               >
-                {{item.meta?(item.meta.title||item.name):item.name}}
+                {{item.meta?(item.meta.title||item.name):item.name}}{{$router.currentRoute.fullPath==item.path?"(当前路由)":""}}
                 <a-icon v-if="item.meta?item.meta.requiresAuth:false" v-bind="iconOption"/>
               </a-button>
             </p>

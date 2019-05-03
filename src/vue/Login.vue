@@ -63,7 +63,8 @@
 export default {
   name: "login",
   meta: {
-    title: "登录"
+    title: "登录",
+    order: 100
   },
   directives: {
     focusNextOnEnter: {

@@ -118,19 +118,7 @@ importPages(require.context('./vue', false, /\.vue$/))
 function importPages(r) {
 
   var arr = r.keys();
-  arr.sort((a, b) => {
-    if (a.match(/NotFound/ig)) {
-      return -1
-    } else {
-      return 1
-    }
-  }).sort((a, b) => {
-    if (b.match(/Home/ig)) {
-      return 1
-    } else {
-      return -1
-    }
-  })
+
   arr.forEach(key => {
     var meta = r(key).default.meta;
     // console.log(r(key).default);
@@ -144,7 +132,33 @@ function importPages(r) {
       component: () => import("./vue" + filePath),
       meta: meta
     })
+
+    routes
+      .sort((a, b) => {//按照自定义的优先级来排序
+        console.log(a.meta.order);
+        if ((a.meta.order||-1) < (b.meta.order||-1)) {
+          return -1
+        } else {
+          return 0
+        }
+      })
+      .sort((a, b) => {//置底404页面
+        if (a.path == '*') {
+          return -1
+        } else {
+          return 1
+        }
+      })
+      .sort((a, b) => {//置顶首页
+        if (b.path == '/') {
+          return 1
+        } else {
+          return -1
+        }
+      })
   });
+
+
 }
 
 // routes.push({

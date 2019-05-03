@@ -64,7 +64,8 @@
 <script>
 export default {
   meta: {
-    title: "注册页"
+    title: "注册页",
+    order: 99
   },
   directives: {
     focus: {
