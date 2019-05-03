@@ -14,29 +14,28 @@ function ProgressBar() {
 
     this.begin = new Date();
 
+    this.step = 0;
+
     // 刷新进度条图案、文字的方法
     this.render = function (opts) {
-        opts.total = params.total;
+
         var percent = (opts.completed / opts.total).toFixed(4);    // 计算进度(子任务的 完成数 除以 总数)
         var cell_num = Math.floor(percent * this.length);             // 计算需要多少个 █ 符号来拼凑图案
 
 
         var cell = empty = processBar = status = statusICON = details = '';
-
-        // 拼接黑色条
-        for (var i = 0; i < cell_num; i++) {
-            cell += chalk[this.theme_color]('█');
-
-        }
-
-        // 拼接灰色条
-        for (var i = 0; i < this.length - cell_num; i++) {
-            empty += '█';
-        }
-
         if (percent < 1) {//还没完成的时候
+            // 拼接黑色条
+            for (var i = 0; i < cell_num; i++) {
+                cell += '█';
 
-            processBar = ' ' + cell + empty;
+            }
+
+            // 拼接灰色条
+            for (var i = 0; i < this.length - cell_num; i++) {
+                empty += '█';
+            }
+            processBar = ' ' + chalk`{${this.theme_color} ${cell}}` + chalk`{white ${empty}}`;
             status = 'Building';
             statusICON = '●';
         } else {
@@ -61,17 +60,8 @@ function ProgressBar() {
         clearTimeout(__this.timer);//如果已经有一个正在播放的进度条,先把它清除掉
 
         var params = arguments[0];
-        var s, e;
 
-        if (typeof arguments[0] == "object") {
-            s = params.begin;
-            e = params.end;
-        } else if (arguments.length == 2) {
-            s = parseInt(arguments[0]);
-            e = parseInt(arguments[1]);
-        }
-
-        devBuild(s, e);
+        devBuild(params.begin, params.end, params.total);
         function devBuild(s, e) {
             var num = s;
 
@@ -81,10 +71,20 @@ function ProgressBar() {
                 num++;
                 __this.timer = setTimeout(function () {
                     devBuild(num, e);
-                }, 2)
+                }, params.delay)
             }
         }
     };
+
+    this.stepRender = function () {
+        clearTimeout(__this.timer);//如果已经有一个正在播放的进度条,先把它清除掉
+        __this.motionRender({
+            begin: __this.step * params.fps,
+            end: (__this.step + 1) * params.fps,
+            total: params.total * params.fps
+        });
+        __this.step++;
+    }
 }
 
 
