@@ -22,6 +22,7 @@ function ProgressBar() {
         var percent = (opts.completed / opts.total).toFixed(4);    // 计算进度(子任务的 完成数 除以 总数)
         var cell_num = Math.floor(percent * this.length);             // 计算需要多少个 █ 符号来拼凑图案
 
+        process.env.PROGRESS_BAR_RUNNING = true;
 
         var cell = empty = processBar = status = statusICON = details = rate = '';
         if (percent < 1) {//还没完成的时候
@@ -46,23 +47,26 @@ function ProgressBar() {
             var duration = this.end - this.begin;//耗时,单位:ms
             function parseTime(d, u) { return u == 's' ? (d / 1000).toFixed(2) + 's' : d + 'ms' }
             details = `Compiled successfully in ${parseTime(duration, 's')}`;
+            process.env.PROGRESS_BAR_RUNNING = false;
+
         }
 
         // 拼接最终文本
         var cmdText = chalk`{${this.theme_color} ${statusICON} ${this.description}}${processBar} ${status}(${(100 * percent).toFixed(0)}%) ${rate}`
 
         var detailsText = chalk`{grey ${details}}`
-
         // 在单行输出文本
         slog('' + cmdText + ' ' + detailsText + '\n');
+
+
     };
 
     this.motionRender = function () {
-        clearTimeout(__this.timer);//如果已经有一个正在播放的进度条,先把它清除掉
+        clearImmediate(__this.timer);//如果已经有一个正在播放的进度条,先把它清除掉
 
         var params = arguments[0];
 
-        devBuild(params.begin, params.end, params.total);
+/*         devBuild(params.begin, params.end, params.total);
         function devBuild(s, e) {
             var num = s;
 
@@ -74,11 +78,22 @@ function ProgressBar() {
                     devBuild(num, e);
                 }, params.delay)
             }
-        }
+
+        } */
+
+        var num = params.begin;
+        __this.timer = setInterval(() => {
+            if (num <= params.end) {
+                __this.render({ completed: num, total: params.total });
+                num++;
+            } else {
+                clearImmediate(__this.timer)
+            }
+        }, params.delay);
     };
 
     this.stepRender = function () {
-        clearTimeout(__this.timer);//如果已经有一个正在播放的进度条,先把它清除掉
+        clearImmediate(__this.timer);//如果已经有一个正在播放的进度条,先把它清除掉
         __this.motionRender({
             begin: __this.step * params.fps,
             end: (__this.step + 1) * params.fps,

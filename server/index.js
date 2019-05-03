@@ -46,8 +46,8 @@ const pb = new ProgressBar({
   length: 25,
   theme_color: `keyword('orange')`,
   total: sum(tasks),
-  fps: 60,
-  delay: 2
+  fps: 30,
+  delay: 0
 });
 
 pb.stepRender();//初始化
