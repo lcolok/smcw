@@ -58,7 +58,6 @@ module.exports = {
     clientLogLevel: 'none'//string: 'none' | 'info' | 'error' | 'warning'
   },
 
-
   /*   configureWebpack: config => {
       if (process.env.NODE_ENV === 'production') {
         return {
@@ -83,5 +82,6 @@ module.exports = {
     }
   },
 
-  lintOnSave: undefined
+  lintOnSave: undefined,
+  productionSourceMap: false
 }
