@@ -1,4 +1,5 @@
 var net = require('net');
+const chalk = require('chalk');
 var axios = require('axios');
 var CircularJSON = require('circular-json');
 var fs = require('fs');
@@ -26,11 +27,15 @@ function portIsOccupied(port) {
         }
     })
         .then(function (response) {
-            console.log(response.headers.etag);
-            fs.writeFileSync(__dirname + '/data.json', CircularJSON.stringify(response, null, '\t'));
+            // console.log(response.headers.etag);
+            if (response.headers.etag == `W/"665-BkYaAS0FaeL/9rTmpnxKwmu3L5Y"`){
+                console.log(chalk.green.inverse(` CLIENT READY `) + ' ' + 'Vue App running at', `${chalk.green('http://localhost:' + port)}`);
+            }
+            fs.writeFile(__dirname + '/data.json', CircularJSON.stringify(response, null, '\t'));
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
+            // console.log("并没有"+port);
         });
 }
 

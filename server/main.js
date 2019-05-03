@@ -30,12 +30,18 @@ function main() {
 
     var app = require('./app');
     app.listen(PORT, function (err) {
+
+
+
         const timer = setInterval(() => {
             if (process.env.PROGRESS_BAR_RUNNING == "false") {//只有进度条播放完才会进行以下声明
                 clearInterval(timer);
-                console.log(chalk.green.inverse(` READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
-                portIsOccupied(3000)
-
+                console.log(chalk.yellow.inverse(` SERVER READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
+                for (var n = 0; n < 10; n++) {
+        
+                    portIsOccupied(8080 + n);
+              
+                }
             }
         }, 0);
 
