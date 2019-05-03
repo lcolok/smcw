@@ -1,9 +1,8 @@
 module.exports = {
-    "requires": {
-        "AV": "leanengine",
-        "requestJS": "request"
+    requires: {
+        AV: "leanengine",
+        requestJS: "request"
     },
-    "apiBuildDest": "./server/serverless",
-    "bundleName":"api.min.js",
-
+    apiBuildDest: "./server/serverless",
+    bundleName: "api.min.js",
 }
