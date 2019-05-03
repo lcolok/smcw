@@ -26,8 +26,21 @@ gulp.task('autoVersion', function (done) {
         }
         ver.commits = currentCommits;
 
-        /* 对major/minor/revision/build进行合成,合成模式为 3.1.2(462) */
+        /* 根据major和minor的变动,进行revision的归零操作 */
 
+        var arr = ver.whole.split('.');
+        var oldMajor = parseInt(arr[0]);
+        var oldMinor = parseInt(arr[1]);
+        if (ver.parts.major > oldMajor) {
+            ver.parts.minor = 0;
+            ver.parts.revision = 0;
+        }
+
+        if (ver.parts.minor > oldMinor) {
+            ver.parts.revision = 0;
+        }
+
+        /* 对major/minor/revision/build进行合成,合成模式为 3.1.2(462) */
         var arr = [];
         for (var i in ver.parts) {
             if (i == 'build') { continue }
