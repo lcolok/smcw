@@ -140,7 +140,7 @@ function importPages(r) {
     // var title = (key.split('.'))[1].split('/')[1];
 
     routes.push({
-      path: meta.staticPath || filePath,//如果有静态路径则用静态路径
+      path: (meta.staticPath || filePath).toLowerCase(),//如果有静态路径则用静态路径
       component: () => import("./vue" + filePath),
       meta: meta
     })

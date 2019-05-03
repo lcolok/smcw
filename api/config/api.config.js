@@ -1,3 +1,5 @@
+/* 请使用function thisFunc(){} 来定义该文件的API */
+
 module.exports = {
     requires: {
         AV: "leanengine",
