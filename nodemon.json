@@ -4,6 +4,7 @@
   ],
   "ext":"js json vue",
   "ignore": [
+    "ver.config.js",
     "tools/*.json",
     "server/api/*",
     "server/serverless/*",

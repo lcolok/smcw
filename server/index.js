@@ -1,5 +1,6 @@
 'use strict';
 const main = require('./main');
+var slog = require('single-line-log').stdout;
 
 const chalk = require('chalk');
 
@@ -20,7 +21,7 @@ const exec = child_process.exec;
 const tasks = {
   gulp: [
     'dev',
-    'leanUp',
+    'autoVersion',
     'leanUp',
     'leanUp',
     'leanUp',
@@ -57,6 +58,11 @@ const ls = spawn('gulp', tasks.gulp, { stdio: "pipe" });//如果使用stdio:"inh
 var i = 0;
 
 ls.stdout.on('data', (data) => {
+
+  var sign = '-fs';
+  if(data.toString().match(sign)){
+    console.log('\n'+(data.toString().replace(sign,'')));
+  }
   if (i % 2 == 0 && i < tasks.gulp.length * 2 - 2) {
     pb.stepRender();
   }
