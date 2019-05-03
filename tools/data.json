@@ -3,11 +3,15 @@
 	"statusText": "OK",
 	"headers": {
 		"x-powered-by": "Express",
+		"server_status": "development",
 		"accept-ranges": "bytes",
+		"cache-control": "public, max-age=0",
+		"last-modified": "Fri, 03 May 2019 15:05:53 GMT",
+		"etag": "W/\"6a4-16a7e3af068\"",
 		"content-type": "text/html; charset=UTF-8",
-		"content-length": "1637",
-		"etag": "W/\"665-BkYaAS0FaeL/9rTmpnxKwmu3L5Y\"",
-		"date": "Fri, 03 May 2019 19:08:57 GMT",
+		"content-length": "1700",
+		"vary": "Accept-Encoding",
+		"date": "Fri, 03 May 2019 19:22:34 GMT",
 		"connection": "close"
 	},
 	"config": {
@@ -23,7 +27,7 @@
 		},
 		"method": "get",
 		"params": {},
-		"url": "http://localhost:8081"
+		"url": "http://localhost:3000"
 	},
 	"request": {
 		"_events": {},
@@ -129,7 +133,7 @@
 			"_httpMessage": "~request"
 		},
 		"connection": "~request~socket",
-		"_header": "GET / HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.18.0\r\nHost: localhost:8081\r\nConnection: close\r\n\r\n",
+		"_header": "GET / HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.18.0\r\nHost: localhost:3000\r\nConnection: close\r\n\r\n",
 		"agent": {
 			"_events": {},
 			"_eventsCount": 1,
@@ -140,7 +144,7 @@
 			},
 			"requests": {},
 			"sockets": {
-				"localhost:8081:": [
+				"localhost:3000:": [
 					"~request~socket"
 				]
 			},
@@ -202,16 +206,24 @@
 			"rawHeaders": [
 				"X-Powered-By",
 				"Express",
+				"server_status",
+				"development",
 				"Accept-Ranges",
 				"bytes",
+				"Cache-Control",
+				"public, max-age=0",
+				"Last-Modified",
+				"Fri, 03 May 2019 15:05:53 GMT",
+				"ETag",
+				"W/\"6a4-16a7e3af068\"",
 				"Content-Type",
 				"text/html; charset=UTF-8",
 				"Content-Length",
-				"1637",
-				"ETag",
-				"W/\"665-BkYaAS0FaeL/9rTmpnxKwmu3L5Y\"",
+				"1700",
+				"Vary",
+				"Accept-Encoding",
 				"Date",
-				"Fri, 03 May 2019 19:08:57 GMT",
+				"Fri, 03 May 2019 19:22:34 GMT",
 				"Connection",
 				"close"
 			],
@@ -227,7 +239,7 @@
 			"_consuming": false,
 			"_dumped": false,
 			"req": "~request",
-			"responseUrl": "http://localhost:8081/",
+			"responseUrl": "http://localhost:3000/",
 			"redirects": []
 		},
 		"aborted": false,
@@ -278,7 +290,7 @@
 				"method": "get",
 				"headers": "~config~headers",
 				"hostname": "localhost",
-				"port": "8081",
+				"port": "3000",
 				"nativeProtocols": {
 					"http:": {
 						"METHODS": [
@@ -419,8 +431,8 @@
 			"_requestBodyLength": 0,
 			"_requestBodyBuffers": [],
 			"_currentRequest": "~request",
-			"_currentUrl": "http://localhost:8081/"
+			"_currentUrl": "http://localhost:3000/"
 		}
 	},
-	"data": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n  <meta charset=\"utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n  <link rel=\"shortcut icon\" href=\"favicon.ico\">\n  <!-- <title>smc_vue</title> -->\n  <!-- <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900\"> -->\n  <!-- <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Material+Icons\"> -->\n<link href=\"0.js\" rel=\"prefetch\"><link href=\"1.js\" rel=\"prefetch\"><link href=\"app.js\" rel=\"preload\" as=\"script\"><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"img/icons/favicon-32x32.png\"><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"img/icons/favicon-16x16.png\"><link rel=\"manifest\" href=\"manifest.json\"><meta name=\"theme-color\" content=\"#4DBA87\"><meta name=\"apple-mobile-web-app-capable\" content=\"no\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\"><meta name=\"apple-mobile-web-app-title\" content=\"smc_vue\"><link rel=\"apple-touch-icon\" href=\"img/icons/apple-touch-icon-152x152.png\"><link rel=\"mask-icon\" href=\"img/icons/safari-pinned-tab.svg\" color=\"#4DBA87\"><meta name=\"msapplication-TileImage\" content=\"img/icons/msapplication-icon-144x144.png\"><meta name=\"msapplication-TileColor\" content=\"#000000\"></head>\n\n<body>\n  <noscript>\n    <strong>We're sorry but smc_vue doesn't work properly without JavaScript enabled. Please\n      enable it to continue.</strong>\n  </noscript>\n  <div id=\"app\"></div>\n  <!-- built files will be auto injected -->\n<script type=\"text/javascript\" src=\"app.js\"></script></body>\n\n</html>"
+	"data": "<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content=\"IE=edge\"><meta name=viewport content=\"width=device-width,initial-scale=1\"><link rel=\"shortcut icon\" href=favicon.ico><link href=assets/js/chunk-2d0e5f56.a781e66a.js rel=prefetch><link href=assets/js/chunk-2d229b36.69076cc7.js rel=prefetch><link href=assets/css/app.e05ecde0.css rel=preload as=style><link href=assets/css/chunk-vendors.18c53a66.css rel=preload as=style><link href=assets/js/app.510ba0ad.js rel=preload as=script><link href=assets/js/chunk-vendors.3580edd7.js rel=preload as=script><link href=assets/css/chunk-vendors.18c53a66.css rel=stylesheet><link href=assets/css/app.e05ecde0.css rel=stylesheet><link rel=icon type=image/png sizes=32x32 href=img/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=img/icons/favicon-16x16.png><link rel=manifest href=manifest.json><meta name=theme-color content=#4DBA87><meta name=apple-mobile-web-app-capable content=no><meta name=apple-mobile-web-app-status-bar-style content=default><meta name=apple-mobile-web-app-title content=smc_vue><link rel=apple-touch-icon href=img/icons/apple-touch-icon-152x152.png><link rel=mask-icon href=img/icons/safari-pinned-tab.svg color=#4DBA87><meta name=msapplication-TileImage content=img/icons/msapplication-icon-144x144.png><meta name=msapplication-TileColor content=#000000></head><body><noscript><strong>We're sorry but electron_vue_leancloud_template doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=assets/js/chunk-vendors.3580edd7.js></script><script src=assets/js/app.510ba0ad.js></script></body></html>"
 }

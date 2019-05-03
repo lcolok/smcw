@@ -34,7 +34,7 @@ function main() {
             if (process.env.PROGRESS_BAR_RUNNING == "false") {//只有进度条播放完才会进行以下声明
                 clearInterval(timer);
                 console.log(chalk.green.inverse(` READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
-                portIsOccupied(8081)
+                portIsOccupied(3000)
 
             }
         }, 0);
