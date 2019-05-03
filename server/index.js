@@ -19,7 +19,11 @@ const exec = child_process.exec;
 
 const tasks = {
   gulp: [
-    'dev'
+    'dev',
+    'leanUp',
+    'leanUp',
+    'leanUp',
+    'leanUp',
   ],
   function: [
     main
@@ -42,19 +46,21 @@ const pb = new ProgressBar({
   length: 25,
   theme_color: `keyword('orange')`,
   total: sum(tasks),
-  fps:60,
-  delay:2
+  fps: 60,
+  delay: 2
 });
 
-pb.stepRender();
+pb.stepRender();//初始化
 
 const ls = spawn('gulp', tasks.gulp, { stdio: "pipe" });//如果使用stdio:"inherit",就能显示彩色的console结果
 
-
+var i = 0;
 
 ls.stdout.on('data', (data) => {
-  // console.log(`stdout: ${data}`);
-
+  if (i % 2 == 0 && i < tasks.gulp.length * 2 - 2) {
+    pb.stepRender();
+  }
+  i++
 });
 
 ls.stderr.on('data', (data) => {
