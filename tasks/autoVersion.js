@@ -22,6 +22,7 @@ gulp.task('autoVersion', function (done) {
         var currentCommits = parseInt(data);
         if (ver.commits !== currentCommits) {
             ver.parts.revision++;
+            ver.parts.build = 0;//build号归零(小括号内的)
         }
         ver.commits = currentCommits;
 
