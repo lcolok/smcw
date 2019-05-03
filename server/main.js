@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const portIsOccupied = require('../tools/portIsOccupied');
 
 function main() {
 
@@ -30,11 +31,14 @@ function main() {
     var app = require('./app');
     app.listen(PORT, function (err) {
         const timer = setInterval(() => {
-            if (process.env.PROGRESS_BAR_RUNNING=="false") {//只有进度条播放完才会进行以下声明
+            if (process.env.PROGRESS_BAR_RUNNING == "false") {//只有进度条播放完才会进行以下声明
                 clearInterval(timer);
                 console.log(chalk.green.inverse(` READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
+                portIsOccupied(8081)
+
             }
         }, 0);
+
 
         // 注册全局未捕获异常处理器
         process.on('uncaughtException', function (err) {

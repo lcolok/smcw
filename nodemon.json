@@ -4,7 +4,7 @@
   ],
   "ext":"js json vue",
   "ignore": [
-    "public/*",
+    "tools/*.json",
     "server/api/*",
     "server/serverless/*",
     ".git"

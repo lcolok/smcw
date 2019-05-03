@@ -17,7 +17,7 @@ importScripts(
   "precache-manifest.250f1fa6cbff94e68d96b0ffb4fd518a.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "electron_vue_leancloud_template"});
+workbox.core.setCacheNameDetails({prefix: "smc_vuetify"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
