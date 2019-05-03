@@ -4,20 +4,13 @@ const chalk = require('chalk');
 const child_process = require('child_process');
 const spawn = child_process.spawn;
 const exec = child_process.exec;
-/* const ls = spawn('gulp', ['dev']);
+const ls = spawn('gulp', ['dev'], {stdio: "inherit"});
 
-ls.stdout.on('data', (data) => {
-  console.log(`stdout: ${data}`);
-});
-
-ls.stderr.on('data', (data) => {
-  console.log(`stderr: ${data}`);
-});
 
 ls.on('close', (code) => {
   console.log(`child process exited with code ${code}`);
   main();
-}); */
+});
 
 // 引入工具模块
 var ProgressBar = require('../tools/progress-bar');
@@ -46,27 +39,31 @@ function devBuild() {
 devBuild(); */
 
 
-if (process.env.npm_lifecycle_event === 'dev') {
+// if (process.env.npm_lifecycle_event === 'dev') {
 
 
 
-  var cmd = exec('gulp dev');
+//   var cmd = exec('gulp dev --ansi', {stdio: "inherit"});
 
-  cmd.on('error', () => {
-    console.log('error');
-  })
-  cmd.on('exit', () => {
-    pb.motionRender(0, 100)
+//   cmd.on('error', () => {
+//     console.log('error');
+//   })
+//   cmd.stdout.on('data', (data) => {
+//     console.log(data);
+//   })
+
+//   cmd.on('exit', () => {
+//     pb.motionRender(0, 100)
   
  
-      main();
-      pb.motionRender(100, 200);
+//       main();
+//       pb.motionRender(100, 200);
 
-  })
+//   })
 
-} else {
-  main();
-}
+// } else {
+//   main();
+// }
 
 
 
