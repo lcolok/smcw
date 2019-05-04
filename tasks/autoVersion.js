@@ -21,8 +21,8 @@ gulp.task('autoVersion', function (done) {
 
         var currentCommits = parseInt(data);
         if (ver.commits !== currentCommits) {
-            ver.parts.revision++;
-            ver.parts.build = 0;//build号归零(小括号内的)
+            ver.parts.minor++;
+            // ver.parts.build = 0;//build号归零(小括号内的)
         }
         ver.commits = currentCommits;
 
@@ -40,14 +40,17 @@ gulp.task('autoVersion', function (done) {
             ver.parts.revision = 0;
         }
 
-        /* 对major/minor/revision/build进行合成,合成模式为 3.1.2(462) */
-        var arr = [];
+        /* 对major/minor/revision/build进行合成,合成模式为 → [开发者手动升级版本].[commits自增].[每次保存自增]([总build版本])  例子:3.1.2(462) */
+
+        ver.whole = `${ver.parts.major}.${ver.parts.minor}.${ver.parts.build}(${ver.commits})`;
+
+        /* var arr = [];
         for (var i in ver.parts) {
             if (i == 'build') { continue }
             arr.push(ver.parts[i]);
         }
         // console.log(`-fs ${arr.join('.')}`);
-        ver.whole = arr.join('.') + `(${ver.parts.build})`;
+        ver.whole = arr.join('.') + `(${ver.commits})`; */
 
         /* 进行stringify和去除key两边的双引号的格式化 */
 
