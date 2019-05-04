@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const portIsOccupied = require('../tools/portIsOccupied');
+const checkLocalServer = require('../tools/check_local_server');
 
 function main() {
 
@@ -39,7 +39,7 @@ function main() {
                 console.log(chalk.yellow.inverse(` SERVER READY `) + ' ' + 'Node app is running on', `${chalk.yellow('http://localhost:' + PORT)}`);
                 for (var n = 0; n < 10; n++) {
         
-                    portIsOccupied(8080 + n);
+                    checkLocalServer(8080 + n);
               
                 }
             }

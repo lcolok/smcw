@@ -6,7 +6,7 @@ const developing = process.env.LEANCLOUD_APP_ENV == "development";
 const chalk = require('chalk');
 
 // 引入工具模块
-var ProgressBar = require('../tools/progress-bar');
+var ProgressBar = require('../tools/progress_bar');
 
 Function.prototype.getname = function () {
   return this.name || this.tostring().match(/function\s*([^(]*)\(/)[1]

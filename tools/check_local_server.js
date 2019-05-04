@@ -4,7 +4,7 @@ var axios = require('axios');
 var CircularJSON = require('circular-json');
 var fs = require('fs');
 // 检测端口是否被占用
-function portIsOccupied(port) {
+function checkLocalServer(port) {
     /*     // 创建服务并监听该端口
         var server = net.createServer().listen(port)
       
@@ -64,4 +64,4 @@ function portIsOccupied(port) {
 
 }
 
-module.exports = portIsOccupied
+module.exports = checkLocalServer
