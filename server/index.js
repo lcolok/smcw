@@ -1,6 +1,7 @@
 'use strict';
 const main = require('./main');
 var slog = require('single-line-log').stdout;
+const developing = process.env.LEANCLOUD_APP_ENV == "development";
 
 const chalk = require('chalk');
 
@@ -10,13 +11,6 @@ var ProgressBar = require('../tools/progress-bar');
 Function.prototype.getname = function () {
   return this.name || this.tostring().match(/function\s*([^(]*)\(/)[1]
 }
-
-
-const child_process = require('child_process');
-const spawn = child_process.spawn;
-const exec = child_process.exec;
-
-// console.log(two.getname());
 
 const tasks = {
   gulp: [
@@ -31,60 +25,78 @@ const tasks = {
   ]
 }
 
-function sum(tasksArray) {
-  var count = 0;
-  for (var i in tasksArray) {
-    count += tasksArray[i].length
-  }
-  return count
-}
-
-
-
 // 初始化一个进度条长度为 50 的 ProgressBar 实例
 const pb = new ProgressBar({
   description: 'Server',
   length: 25,
   theme_color: `keyword('orange')`,
-  total: sum(tasks),
+  // total: sum(tasks),
+  total: (_ => {
+    var count = 0;
+    for (var i in tasks) {
+      count += tasks[i].length
+    }
+    return count
+  })(),
   fps: 30,
   delay: 0
 });
 
-pb.stepRender();//初始化
+developing ? pb.stepRender() : "";//初次呈现 ProgressBar
 
-const ls = spawn('gulp', tasks.gulp, { stdio: "pipe" });//如果使用stdio:"inherit",就能显示彩色的console结果
+if (developing) {//leancloud的开发环境下
 
-var i = 0;
+  const child_process = require('child_process');
+  const spawn = child_process.spawn;
+  const exec = child_process.exec;
 
-ls.stdout.on('data', (data) => {
+  // console.log(two.getname());
 
-  var sign = '-fs';
-  if(data.toString().match(sign)){
-    console.log('\n'+(data.toString().replace(sign,'')));
-  }
-  if (i % 2 == 0 && i < tasks.gulp.length * 2 - 2) {
-    pb.stepRender();
-  }
-  i++
-});
 
-ls.stderr.on('data', (data) => {
 
-  console.log(`stderr: ${data}`);
-});
 
-ls.on('close', (code) => {
-  // console.log(`child process exited with code ${code}`);
+
+
+  const ls = spawn('gulp', tasks.gulp, { stdio: "pipe" });//如果使用stdio:"inherit",就能显示彩色的console结果
+
+  var i = 0;
+
+  ls.stdout.on('data', (data) => {
+
+    var sign = '-fs';
+    if (data.toString().match(sign)) {
+      console.log('\n' + (data.toString().replace(sign, '')));
+    }
+    if (i % 2 == 0 && i < tasks.gulp.length * 2 - 2) {
+      pb.stepRender();
+    }
+    i++
+  });
+
+  ls.stderr.on('data', (data) => {
+
+    console.log(`stderr: ${data}`);
+  });
+
+  ls.on('close', (code) => {
+    // console.log(`child process exited with code ${code}`);
+
+    serverScriptsRun();
+
+  });
+
+} else {
+  serverScriptsRun()
+}
+
+function serverScriptsRun() {
 
   for (var i in tasks.function) {
-    pb.stepRender();
-
+    developing ? pb.stepRender() : "";
     (tasks.function[i])();
   }
 
-});
-
+}
 
 
 /* var num = 0, total = 200;
