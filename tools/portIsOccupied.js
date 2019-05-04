@@ -45,9 +45,10 @@ function portIsOccupied(port) {
         }
     })
         .then(function (response) {
-
+            // var code = '看到这句话你就知道它正在开发中|特殊编号:Vue_Vuetify_LCO_Dev';
+            var code = `${require('../package.json').name}`
             // console.log(response.headers.etag);
-            if (response.data.match('看到这句话你就知道它正在开发中|特殊编号:Vue_Vuetify_LCO_Dev')) {
+            if (response.data.match(code)) {
                 tellReady(port)
             }
 
