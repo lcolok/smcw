@@ -17,7 +17,7 @@ module.exports = () => {
             for (var app of apps) {
                 app.app_id == process.env.LEANCLOUD_APP_ID ? console.log(app.app_name, app) : ""
             }
-            fs.writeFileSync("smc.data.json", JSON.stringify(app));
+            // fs.writeFileSync("smc.data.json", JSON.stringify(app));
 
             console.log('\n');
         } else {

@@ -33,11 +33,11 @@ gulp.task('autoVersion', function (done) {
         var oldMinor = parseInt(arr[1]);
         if (ver.parts.major > oldMajor) {
             ver.parts.minor = 0;
-            ver.parts.revision = 0;
+            ver.parts.build = 0;
         }
 
         if (ver.parts.minor > oldMinor) {
-            ver.parts.revision = 0;
+            ver.parts.build = 0;
         }
 
         /* 对major/minor/revision/build进行合成,合成模式为 → [开发者手动升级版本].[commits自增].[每次保存自增]([总build版本])  例子:3.1.2(462) */
