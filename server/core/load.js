@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const checkLocalServer = require('../tools/check_local_server');
+const checkLocalServer = require('../utils/check_local_server');
 const app = require('./app');
 
 

@@ -1,12 +1,12 @@
 'use strict';
-const load = require('./load');
+const load = require('./core/load');
 var slog = require('single-line-log').stdout;
 const developing = process.env.LEANCLOUD_APP_ENV == "development";
 
 const chalk = require('chalk');
 
 // 引入工具模块
-var ProgressBar = require('../tools/progress_bar');
+var ProgressBar = require('./utils/progress_bar');
 
 Function.prototype.getname = function () {
   return this.name || this.tostring().match(/function\s*([^(]*)\(/)[1]
