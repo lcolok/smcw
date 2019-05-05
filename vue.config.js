@@ -31,7 +31,7 @@ function leanUp() {
 }
 
 module.exports = {
-  publicPath: '/smc/',
+  publicPath: '/SMC/',
   assetsDir: 'assets',
 
   css: {
