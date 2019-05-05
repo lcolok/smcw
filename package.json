@@ -10,8 +10,8 @@
     "electron:serve": "vue-cli-service electron:serve",
     "dev": "nodemon ./server/index.js",
     "start": "node ./server/index.js",
-    "predeploy": "npx vue-cli-service build --dest='dist'",
-    "deploy": "git subtree push --prefix=dist origin gh-pages"
+    "predeploy": "npx vue-cli-service build --dest dist",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "main": "index.js",
   "dependencies": {
