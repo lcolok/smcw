@@ -1,29 +1,19 @@
 'use strict';
 const load = require('./core/load');
-var slog = require('single-line-log').stdout;
 const developing = process.env.LEANCLOUD_APP_ENV == "development";
 
-const chalk = require('chalk');
-
-// 引入工具模块
-var ProgressBar = require('./utils/progress_bar');
-
-Function.prototype.getname = function () {
-  return this.name || this.tostring().match(/function\s*([^(]*)\(/)[1]
-}
-
 const tasks = {
-  gulp: [
+  gulp: [//开发模式下会进行构建
     'dev',
     'autoVersion',
-    'leanUp',
-    'leanUp',
-    'leanUp',
   ],
-  module: [
+  module: [//开发环境和生产环境都会运行的组件
     load
   ]
 }
+
+// 引入进度条显示工具模块
+const ProgressBar = require('./utils/progress_bar');
 
 // 初始化一个进度条长度为 50 的 ProgressBar 实例
 const pb = new ProgressBar({
@@ -50,13 +40,6 @@ if (developing) {//leancloud的开发环境下
   const spawn = child_process.spawn;
   const exec = child_process.exec;
 
-  // console.log(two.getname());
-
-
-
-
-
-
   const ls = spawn('gulp', tasks.gulp, { stdio: "pipe" });//如果使用stdio:"inherit",就能显示彩色的console结果
 
   var i = 0;
@@ -81,63 +64,12 @@ if (developing) {//leancloud的开发环境下
   ls.on('close', (code) => {
     // console.log(`child process exited with code ${code}`);
 
-    serverScriptsRun();
 
   });
 
-} else {
-  serverScriptsRun()
 }
 
-function serverScriptsRun() {
-
-  for (var i in tasks.module) {
-    developing ? pb.stepRender() : "";
-    (tasks.module[i])();
-  }
-
+for (var i in tasks.module) {
+  developing ? pb.stepRender() : "";
+  (tasks.module[i])();
 }
-
-
-/* var num = 0, total = 200;
-function devBuild() {
-  if (num <= total) {
-    // 更新进度条
-    pb.render({ completed: num, total: total });
-
-    num++;
-    setTimeout(function () {
-      devBuild();
-    }, 2)
-  }
-}
-devBuild(); */
-
-
-// if (process.env.npm_lifecycle_event === 'dev') {
-
-
-
-//   var cmd = exec('gulp dev --ansi', {stdio: "inherit"});
-
-//   cmd.on('error', () => {
-//     console.log('error');
-//   })
-//   cmd.stdout.on('data', (data) => {
-//     console.log(data);
-//   })
-
-//   cmd.on('exit', () => {
-//     pb.motionRender(0, 100)
-
-
-//       main();
-//       pb.motionRender(100, 200);
-
-//   })
-
-// } else {
-//   main();
-// }
-
-
