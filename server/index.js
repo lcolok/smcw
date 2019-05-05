@@ -1,5 +1,5 @@
 'use strict';
-const main = require('./main');
+const load = require('./load');
 var slog = require('single-line-log').stdout;
 const developing = process.env.LEANCLOUD_APP_ENV == "development";
 
@@ -20,8 +20,8 @@ const tasks = {
     'leanUp',
     'leanUp',
   ],
-  function: [
-    main
+  module: [
+    load
   ]
 }
 
@@ -91,9 +91,9 @@ if (developing) {//leancloud的开发环境下
 
 function serverScriptsRun() {
 
-  for (var i in tasks.function) {
+  for (var i in tasks.module) {
     developing ? pb.stepRender() : "";
-    (tasks.function[i])();
+    (tasks.module[i])();
   }
 
 }
