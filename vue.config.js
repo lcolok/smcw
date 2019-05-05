@@ -31,7 +31,7 @@ function leanUp() {
 }
 
 module.exports = {
-  publicPath: './',
+  publicPath: '/smc/',
   assetsDir: 'assets',
 
   css: {
@@ -83,5 +83,8 @@ module.exports = {
   },
 
   lintOnSave: undefined,
-  productionSourceMap: false
+  productionSourceMap: false,
+  outputDir: undefined,
+  runtimeCompiler: undefined,
+  parallel: undefined,
 }

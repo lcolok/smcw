@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.250f1fa6cbff94e68d96b0ffb4fd518a.js"
+  "/smc/precache-manifest.023a7dac70f65d2f64ed2f369932b315.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "smc_vuetify"});
+workbox.core.setCacheNameDetails({prefix: "smc_vue"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
