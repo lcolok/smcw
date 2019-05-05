@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d229b36"],{df20:function(n,o,p){n.exports=p.p+"assets/img/logo.82b9c7a5.png"}}]);
