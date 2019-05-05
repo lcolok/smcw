@@ -16,11 +16,11 @@ gulp.task('buildLeanCloudAPI', function (done) {
 
     var destPath = config.apiBuildDest;
 
-    try {
+/*     try {
         del([
             destPath
         ]);
-    } catch (e) { console.log(e); }
+    } catch (e) { console.log(e); } */
 
     var orig = '-debug.js';
     gulp.src('api/*.js')//只读取根目录的js文件
