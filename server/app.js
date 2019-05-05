@@ -9,15 +9,7 @@ var bodyParser = require('body-parser');
 var AV = require('leanengine');
 var fs = require('fs');
 
-/* var apiPath = __dirname + '/api';
-var minPath = apiPath + 'Min'; 
-if (fs.existsSync(minPath)) {
-  console.log(`存在apiMin`);
-  apiPath = minPath;
-} */
 // 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
-
-
 var apiBuildDest = require(path.resolve('api/config/api.config.js')).apiBuildDest;
 
 require('require-all')({
@@ -29,7 +21,6 @@ require('require-all')({
         return fileName;
     },
 })
-
 
 var app = express();
 
@@ -47,14 +38,11 @@ if (process.env.npm_lifecycle_event == 'dev') {
     distPath = path.join(__dirname, '../dist');
 }
 
-
-
 // 设置模板引擎
 app.set('views', distPath);
 var ejs = require('ejs');  //我是新引入的ejs插件,让express也能够加载html
 app.engine('html', ejs.__express);
 app.set('view engine', 'html');
-
 
 // 设置默认超时时间
 app.use(timeout('15s'));
@@ -77,8 +65,6 @@ app.get('/', function (req, res) {
     console.log(req);
     res.render('index', { currentTime: new Date() });
 });
-
-
 
 app.use(function (req, res, next) {
     // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
