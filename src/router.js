@@ -6,8 +6,10 @@ Vue.use(Router);
 import AV from './plugins/AVinit'
 Vue.prototype.$AV = AV;
 
-import custom_dev_port from '!raw-loader!../.leancloud/custom_dev_port';
+
+
 if (process.env.NODE_ENV == "development") {//如果是处于开发状态的话
+  const custom_dev_port = require('../api/config/api.config.js').dev.port;
   AV._setServerURLs('http://localhost:' + custom_dev_port)//设置本地服务器端口(必须先进行 lean up 操作)
 }
 
