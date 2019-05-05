@@ -1,3 +1,4 @@
+var path = require('path');
 var net = require('net');
 const chalk = require('chalk');
 var axios = require('axios');
@@ -46,7 +47,7 @@ function checkLocalServer(port) {
     })
         .then(function (response) {
             // var code = '看到这句话你就知道它正在开发中|特殊编号:Vue_Vuetify_LCO_Dev';
-            var code = require('../../package.json').name;
+            var code = require(path.resolve('package.json')).name;
             // console.log(response.headers.etag);
             if (response.data.match(code)) {
                 tellReady(port)
@@ -59,7 +60,8 @@ function checkLocalServer(port) {
         });
 
     function tellReady(currentPort) {
-        console.log(chalk.green.inverse(` CLIENT READY `) + ' ' + 'Vue App running at', `${chalk.green('http://localhost:' + currentPort)}`);
+        var publicPath = require(path.resolve('vue.config.js')).publicPath;//获取公共路径
+        console.log(chalk.green.inverse(` CLIENT READY `) + ' ' + 'Vue App running at', `${chalk.green('http://localhost:' + currentPort + publicPath)}`);
     }
 
 }
